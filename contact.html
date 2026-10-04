@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Lilith's Eclipse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      color: #E8ECF2;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+      background: transparent;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .base-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -10;
+      background: radial-gradient(ellipse at 50% 50%, #071530 0%, #050E22 50%, #02060F 100%);
+    }
+
+    .ribbons {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -9;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .ribbon {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+    }
+    .ribbon-1 { width: 900px; height: 700px; background: radial-gradient(ellipse 60% 40% at 40% 50%, #2C6FB8 0%, #174C8A 30%, rgba(23, 76, 138, 0) 70%); top: -20%; left: -20%; animation: ribbonFloat1 25s ease-in-out infinite; }
+    .ribbon-2 { width: 800px; height: 1200px; background: radial-gradient(ellipse 50% 50% at 50% 50%, #3A82CC 0%, #174C8A 40%, rgba(23, 76, 138, 0) 75%); top: 5%; right: -25%; animation: ribbonFloat2 30s ease-in-out infinite; opacity: 0.45; }
+    .ribbon-3 { width: 1000px; height: 800px; background: radial-gradient(ellipse 60% 50% at 50% 50%, #1E5EA8 0%, #0F3B70 40%, rgba(15, 59, 112, 0) 70%); bottom: -25%; left: -15%; animation: ribbonFloat3 32s ease-in-out infinite; opacity: 0.5; }
+    .ribbon-4 { width: 700px; height: 900px; background: radial-gradient(ellipse 40% 60% at 50% 50%, #4A8CD0 0%, #1E5EA8 35%, rgba(30, 94, 168, 0) 70%); top: 30%; left: 25%; opacity: 0.3; animation: ribbonFloat4 40s ease-in-out infinite; }
+    .ribbon-5 { width: 800px; height: 700px; background: radial-gradient(ellipse 55% 45% at 50% 50%, #2C6FB8 0%, #174C8A 40%, rgba(23, 76, 138, 0) 70%); bottom: -15%; right: -20%; opacity: 0.35; animation: ribbonFloat5 38s ease-in-out infinite; }
+
+    @keyframes ribbonFloat1 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 33% { transform: translate(80px, 60px) scale(1.15) rotate(8deg); } 66% { transform: translate(-40px, 100px) scale(1.05) rotate(-6deg); } }
+    @keyframes ribbonFloat2 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(-100px, 120px) scale(1.2) rotate(-10deg); } }
+    @keyframes ribbonFloat3 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(120px, -80px) scale(1.15) rotate(6deg); } }
+    @keyframes ribbonFloat4 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-45%, -55%) scale(1.35); } }
+    @keyframes ribbonFloat5 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(-80px, -100px) scale(1.25) rotate(10deg); } }
+
+    .streaks {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -8;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .streak {
+      position: absolute;
+      background: linear-gradient(90deg, transparent 0%, rgba(90, 150, 220, 0.65) 50%, transparent 100%);
+      filter: blur(2px);
+      opacity: 0.5;
+      border-radius: 50%;
+    }
+    .streak-1 { width: 55%; height: 1.5px; top: 25%; left: 20%; transform: rotate(-25deg); animation: streakGlow1 9s ease-in-out infinite; box-shadow: 0 0 15px 3px rgba(90, 150, 220, 0.4); }
+    .streak-2 { width: 40%; height: 1.5px; top: 55%; left: 40%; transform: rotate(15deg); animation: streakGlow2 11s ease-in-out infinite; box-shadow: 0 0 12px 2px rgba(90, 150, 220, 0.35); }
+    .streak-3 { width: 35%; height: 1px; top: 75%; left: 10%; transform: rotate(35deg); animation: streakGlow3 13s ease-in-out infinite; box-shadow: 0 0 12px 2px rgba(90, 150, 220, 0.4); }
+
+    @keyframes streakGlow1 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+    @keyframes streakGlow2 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.55; } }
+    @keyframes streakGlow3 { 0%, 100% { opacity: 0.08; } 50% { opacity: 0.4; } }
+
+    .starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -7;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(1px 1px at 8% 12%, rgba(232, 236, 242, 0.45), transparent),
+        radial-gradient(1px 1px at 22% 28%, rgba(232, 236, 242, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 38% 8%, rgba(90, 155, 212, 0.5), transparent),
+        radial-gradient(1px 1px at 52% 42%, rgba(232, 236, 242, 0.35), transparent),
+        radial-gradient(1.5px 1.5px at 68% 18%, rgba(70, 130, 180, 0.55), transparent),
+        radial-gradient(1px 1px at 82% 52%, rgba(232, 236, 242, 0.35), transparent),
+        radial-gradient(1px 1px at 12% 68%, rgba(232, 236, 242, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 32% 82%, rgba(90, 155, 212, 0.45), transparent);
+      animation: twinkleSoft 7s ease-in-out infinite;
+    }
+    @keyframes twinkleSoft { 0%, 100% { opacity: 0.6; } 50% { opacity: 0.3; } }
+
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #E8ECF2;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 3px #4A9BE8, 0 0 20px 6px rgba(70, 130, 180, 0.4);
+      top: 8%; left: -10%;
+      z-index: -6;
+      animation: shoot 25s linear infinite;
+      opacity: 0;
+    }
+    .shooting-star::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 150px; height: 1.5px;
+      background: linear-gradient(90deg, #4A9BE8, transparent);
+      transform: translateX(-100%);
+    }
+    @keyframes shoot { 0% { transform: translate(0, 0); opacity: 0; } 4% { opacity: 1; } 16% { transform: translate(120vw, 50vh); opacity: 0; } 100% { transform: translate(120vw, 50vh); opacity: 0; } }
+    .shooting-star.delay-1 { top: 40%; animation: shoot 35s linear infinite; animation-delay: 14s; }
+
+    h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; color: #E8ECF2; }
+    p { font-weight: 300; color: #B9C2D0; margin-bottom: 12px; }
+    strong { color: #E8ECF2; font-weight: 600; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(8, 17, 31, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.25);
+      z-index: 100;
+      box-shadow: 0 0 25px rgba(70, 150, 220, 0.12);
+    }
+    .logo { font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 3px; }
+    .logo a { color: #E8ECF2; text-decoration: none; }
+    .nav-links a { color: #B9C2D0; text-decoration: none; margin: 0 15px; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #E8ECF2; text-shadow: 0 0 10px rgba(90, 170, 240, 0.9); }
+    #lang-toggle {
+      background: rgba(20, 60, 120, 0.35);
+      border: 1px solid rgba(70, 140, 210, 0.5);
+      color: #E8ECF2;
+      padding: 6px 18px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      transition: 0.4s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(70, 150, 220, 0.2);
+    }
+    #lang-toggle:hover { background: rgba(70, 140, 210, 0.4); border-color: rgba(90, 170, 240, 0.8); box-shadow: 0 8px 30px rgba(90, 170, 240, 0.5); }
+
+    .page-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 25px rgba(70, 150, 220, 0.6);
+      animation: titlePulse 7s ease-in-out infinite;
+    }
+    @keyframes titlePulse { 0%, 100% { text-shadow: 0 0 22px rgba(70, 150, 220, 0.6), 0 0 45px rgba(70, 150, 220, 0.3); } 50% { text-shadow: 0 0 35px rgba(90, 170, 240, 0.85), 0 0 70px rgba(70, 150, 220, 0.5); } }
+    .page-subtitle {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 1rem;
+      color: #8995A8;
+    }
+
+    .contact-card {
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 40px;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      animation: cardGlow 8s ease-in-out infinite;
+    }
+    @keyframes cardGlow { 0%, 100% { border-color: rgba(70, 140, 210, 0.35); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08); } 50% { border-color: rgba(90, 170, 240, 0.55); box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55), 0 8px 35px rgba(90, 170, 240, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15); } }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(70, 140, 210, 0.2) 0%, transparent 60%);
+      animation: pulse 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.1); opacity: 0.7; } }
+    .contact-card > * { position: relative; z-index: 1; }
+
+    .card-icon {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      color: #4A9BE8;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+      text-shadow: 0 0 40px rgba(90, 170, 240, 1);
+      animation: iconPulse 3s ease-in-out infinite;
+    }
+    @keyframes iconPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .card-label { font-family: 'Cinzel', serif; font-size: 0.8rem; color: #8995A8; letter-spacing: 4px; margin-bottom: 12px; text-transform: uppercase; }
+    .card-handle { font-family: 'Cinzel', serif; font-size: 2rem; letter-spacing: 2px; color: #E8ECF2; margin-bottom: 25px; text-shadow: 0 0 25px rgba(90, 170, 240, 0.9); word-break: break-all; }
+    .card-desc { max-width: 500px; margin: 0 auto 30px auto; font-size: 0.95rem; color: #B9C2D0; line-height: 1.8; }
+    .card-btn {
+      display: inline-block;
+      padding: 16px 45px;
+      background: rgba(20, 60, 120, 0.35);
+      color: #E8ECF2;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 3px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(90, 170, 240, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), 0 2px 12px rgba(70, 150, 220, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .card-btn:hover { background: rgba(70, 140, 210, 0.5); border-color: rgba(90, 170, 240, 1); box-shadow: 0 15px 45px rgba(90, 170, 240, 0.7), 0 4px 20px rgba(70, 150, 220, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2); letter-spacing: 4px; transform: translateY(-3px); }
+
+    .contact-for {
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .contact-for h2 { font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(70, 140, 210, 0.25); text-align: center; text-shadow: 0 0 15px rgba(90, 170, 240, 0.6); }
+    .contact-for ul { list-style: none; padding: 0; }
+    .contact-for li { padding: 12px 0 12px 30px; position: relative; color: #B9C2D0; font-size: 0.95rem; border-bottom: 1px solid rgba(70, 140, 210, 0.1); }
+    .contact-for li:last-child { border-bottom: none; }
+    .contact-for li::before { content: "✦"; position: absolute; left: 0; color: #4A9BE8; top: 16px; text-shadow: 0 0 10px rgba(90, 170, 240, 0.9); }
+
+    .important-note {
+      margin-top: 40px;
+      padding: 25px;
+      background: rgba(70, 140, 210, 0.15);
+      border: 1px solid rgba(90, 170, 240, 0.4);
+      border-left: 3px solid #4A9BE8;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #E8ECF2;
+      line-height: 1.8;
+      border-radius: 10px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(70, 150, 220, 0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: rgba(5, 7, 13, 0.85); 
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(70, 140, 210, 0.2);
+      font-size: 0.8rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    body[dir="rtl"] { font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body[dir="rtl"] .contact-for li { padding: 12px 30px 12px 0; }
+    body[dir="rtl"] .contact-for li::before { left: auto; right: 0; }
+    body[dir="rtl"] .important-note { border-left: none; border-right: 3px solid #4A9BE8; }
+
+    @media (max-width: 768px) {
+      .page-title { font-size: 1.9rem; }
+      .page-subtitle { font-size: 0.9rem; margin-bottom: 40px; }
+      .contact-card { padding: 45px 25px; border-radius: 12px; }
+      .card-handle { font-size: 1.5rem; }
+      .card-icon { font-size: 2.5rem; }
+      .card-desc { font-size: 0.88rem; }
+      .card-btn { padding: 14px 32px; font-size: 0.85rem; letter-spacing: 2px; }
+      .contact-for { padding: 28px 22px; border-radius: 12px; }
+      .contact-for h2 { font-size: 1.05rem; }
+      .contact-for li { font-size: 0.9rem; }
+      .important-note { font-size: 0.88rem; padding: 20px 18px; }
+      nav { padding: 15px 20px; }
+      .nav-links { display: none; }
+      #lang-toggle { padding: 6px 14px; font-size: 0.75rem; }
+      .page-container { padding: 50px 15px; }
+      .ribbon-1 { width: 500px; height: 400px; filter: blur(60px); top: -15%; left: -30%; opacity: 0.45; }
+      .ribbon-2 { width: 450px; height: 700px; filter: blur(60px); top: 5%; right: -35%; opacity: 0.4; }
+      .ribbon-3 { width: 550px; height: 450px; filter: blur(60px); bottom: -20%; left: -25%; opacity: 0.45; }
+      .ribbon-4 { width: 350px; height: 500px; filter: blur(60px); top: 35%; left: 20%; opacity: 0.25; }
+      .ribbon-5 { width: 400px; height: 350px; filter: blur(60px); bottom: -10%; right: -30%; opacity: 0.3; }
+      .shooting-star::after { width: 100px; }
+    }
+    @media (max-width: 420px) {
+      .page-title { font-size: 1.5rem; }
+      .card-handle { font-size: 1.2rem; }
+      .card-btn { padding: 12px 26px; font-size: 0.78rem; }
+      .contact-for h2 { font-size: 0.95rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="base-bg"></div>
+
+  <div class="ribbons">
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+    <div class="ribbon ribbon-3"></div>
+    <div class="ribbon ribbon-4"></div>
+    <div class="ribbon ribbon-5"></div>
+  </div>
+
+  <div class="streaks">
+    <div class="streak streak-1"></div>
+    <div class="streak streak-2"></div>
+    <div class="streak streak-3"></div>
+  </div>
+
+  <div class="starfield"></div>
+
+  <div class="shooting-star"></div>
+  <div class="shooting-star delay-1"></div>
+
+  <nav>
+    <div class="logo"><a href="index.html">LILITH'S ECLIPSE SERVICES</a></div>
+    <div class="nav-links">
+      <a href="courses.html" data-en="Courses" data-ar="الدورات">Courses</a>
+      <a href="sessions.html" data-en="Sessions" data-ar="الجلسات">Sessions</a>
+      <a href="hypnosis.html" data-en="Hypnosis" data-ar="التنويم الإيحائي">Hypnosis</a>
+      <a href="books.html" data-en="Books" data-ar="الكتب">Books</a>
+      <a href="payment.html" data-en="Payment" data-ar="طرق الدفع">Payment</a>
+      <a href="contact.html" class="active" data-en="Contact" data-ar="التواصل">Contact</a>
+    </div>
+    <button id="lang-toggle">AR | EN</button>
+  </nav>
+
+  <main class="page-container">
+    <h1 class="page-title" data-en="CONTACT" data-ar="التواصل">CONTACT</h1>
+    <p class="page-subtitle" data-en="Contact me for services. Use my bot for information." data-ar="تواصلي معي للخدمات. استخدمي البوت للحصول على المعلومات.">Contact me for services. Use my bot for information.</p>
+
+    <!-- CARD 1 — CONTACT ME -->
+    <div class="contact-card">
+      <div class="card-icon">◈</div>
+      <div class="card-label" data-en="CONTACT ME HERE" data-ar="تواصلي معي هنا">CONTACT ME HERE</div>
+      <div class="card-handle">@xlilithec</div>
+      <p class="card-desc" data-en="This is where you contact me directly for any service — sessions, courses, personalized hypnosis, books, payment, or any questions." data-ar="هنا تتواصلين معي مباشرة لأي خدمة — الجلسات، الدورات، التنويم الإيحائي المخصص، الكتب، الدفع، أو أي أسئلة.">This is where you contact me directly for any service — sessions, courses, personalized hypnosis, books, payment, or any questions.</p>
+      <a href="https://t.me/xlilithec" target="_blank" class="card-btn" data-en="CONTACT ME" data-ar="تواصلي معي">CONTACT ME</a>
+    </div>
+
+    <!-- CARD 2 — INFO BOT -->
+    <div class="contact-card">
+      <div class="card-icon">✦</div>
+      <div class="card-label" data-en="MY INFORMATION BOT" data-ar="بوت المعلومات الخاص بي">MY INFORMATION BOT</div>
+      <div class="card-handle">@lilithseclipsebot</div>
+      <a href="https://t.me/lilithseclipsebot" target="_blank" class="card-btn" data-en="OPEN BOT" data-ar="افتحي البوت">OPEN BOT</a>
+    </div>
+
+    <!-- WHAT TO CONTACT FOR -->
+    <div class="contact-for">
+      <h2 data-en="WHAT TO CONTACT ME FOR" data-ar="لماذا تتواصلين معي">WHAT TO CONTACT ME FOR</h2>
+      <ul>
+        <li data-en="Booking a private session (call or messages + audio)" data-ar="حجز جلسة خاصة (اتصال أو رسائل + تسجيلات صوتية)">Booking a private session (call or messages + audio)</li>
+        <li data-en="Purchasing a course from the Courses page" data-ar="شراء دورة من صفحة الدورات">Purchasing a course from the Courses page</li>
+        <li data-en="Submitting a personalized hypnosis request" data-ar="إرسال طلب تنويم إيحائي مخصص">Submitting a personalized hypnosis request</li>
+        <li data-en="Buying a book (PDF version)" data-ar="شراء كتاب (نسخة PDF)">Buying a book (PDF version)</li>
+        <li data-en="Any question about my services" data-ar="أي سؤال حول خدماتي">Any question about my services</li>
+        <li data-en="Payment instructions and sending your payment receipt" data-ar="تعليمات الدفع وإرسال إيصال الدفع">Payment instructions and sending your payment receipt</li>
+      </ul>
+    </div>
+
+    <!-- IMPORTANT NOTE -->
+    <div class="important-note">
+      <p data-en="Telegram is the only channel for services and booking. Please do not use any other platform to contact me about services." data-ar="Telegram هي القناة الوحيدة للخدمات والحجز. يرجى عدم استخدام أي منصة أخرى للتواصل معي بخصوص الخدمات.">Telegram is the only channel for services and booking. Please do not use any other platform to contact me about services.</p>
+      <p style="margin-top: 15px;" data-en="Please do not ask me for my phone number. All communication is done through Telegram only." data-ar="يرجى عدم طلب رقم هاتفي. كل التواصل يتم عبر Telegram فقط.">Please do not ask me for my phone number. All communication is done through Telegram only.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>LILITH'S ECLIPSE</p>
+    <p>Telegram: @xlilithec</p>
+    <p>© 2026 Lilith's Eclipse. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('lang-toggle');
+    const elementsToTranslate = document.querySelectorAll('[data-en]');
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function applyLanguage() {
+      if (currentLang === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+        document.documentElement.lang = 'ar';
+        elementsToTranslate.forEach(el => {
+          el.textContent = el.getAttribute('data-ar');
+        });
+        langToggle.textContent = 'EN | AR';
+      } else {
+        document.body.setAttribute('dir', 'ltr');
+        document.documentElement.lang = 'en';
+        elementsToTranslate.forEach(el => {
+          el.textContent = el.getAttribute('data-en');
+        });
+        langToggle.textContent = 'AR | EN';
+      }
+    }
+
+    applyLanguage();
+
+    langToggle.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      localStorage.setItem('lang', currentLang);
+      applyLanguage();
+    });
+  </script>
+</body>
+</html>

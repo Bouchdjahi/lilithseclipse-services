@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessions — Lilith's Eclipse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      color: #E8ECF2;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+      background: transparent;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .base-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -10;
+      background: radial-gradient(ellipse at 50% 50%, #071530 0%, #050E22 50%, #02060F 100%);
+    }
+
+    .ribbons {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -9;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .ribbon {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+    }
+    .ribbon-1 {
+      width: 900px; height: 700px;
+      background: radial-gradient(ellipse 60% 40% at 40% 50%, #2C6FB8 0%, #174C8A 30%, rgba(23, 76, 138, 0) 70%);
+      top: -20%; left: -20%;
+      animation: ribbonFloat1 25s ease-in-out infinite;
+    }
+    .ribbon-2 {
+      width: 800px; height: 1200px;
+      background: radial-gradient(ellipse 50% 50% at 50% 50%, #3A82CC 0%, #174C8A 40%, rgba(23, 76, 138, 0) 75%);
+      top: 5%; right: -25%;
+      animation: ribbonFloat2 30s ease-in-out infinite;
+      opacity: 0.45;
+    }
+    .ribbon-3 {
+      width: 1000px; height: 800px;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, #1E5EA8 0%, #0F3B70 40%, rgba(15, 59, 112, 0) 70%);
+      bottom: -25%; left: -15%;
+      animation: ribbonFloat3 32s ease-in-out infinite;
+      opacity: 0.5;
+    }
+    .ribbon-4 {
+      width: 700px; height: 900px;
+      background: radial-gradient(ellipse 40% 60% at 50% 50%, #4A8CD0 0%, #1E5EA8 35%, rgba(30, 94, 168, 0) 70%);
+      top: 30%; left: 25%;
+      opacity: 0.3;
+      animation: ribbonFloat4 40s ease-in-out infinite;
+    }
+    .ribbon-5 {
+      width: 800px; height: 700px;
+      background: radial-gradient(ellipse 55% 45% at 50% 50%, #2C6FB8 0%, #174C8A 40%, rgba(23, 76, 138, 0) 70%);
+      bottom: -15%; right: -20%;
+      opacity: 0.35;
+      animation: ribbonFloat5 38s ease-in-out infinite;
+    }
+
+    @keyframes ribbonFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      33%      { transform: translate(80px, 60px) scale(1.15) rotate(8deg); }
+      66%      { transform: translate(-40px, 100px) scale(1.05) rotate(-6deg); }
+    }
+    @keyframes ribbonFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50%      { transform: translate(-100px, 120px) scale(1.2) rotate(-10deg); }
+    }
+    @keyframes ribbonFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50%      { transform: translate(120px, -80px) scale(1.15) rotate(6deg); }
+    }
+    @keyframes ribbonFloat4 {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50%      { transform: translate(-45%, -55%) scale(1.35); }
+    }
+    @keyframes ribbonFloat5 {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50%      { transform: translate(-80px, -100px) scale(1.25) rotate(10deg); }
+    }
+
+    .streaks {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -8;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .streak {
+      position: absolute;
+      background: linear-gradient(90deg, transparent 0%, rgba(90, 150, 220, 0.65) 50%, transparent 100%);
+      filter: blur(2px);
+      opacity: 0.5;
+      border-radius: 50%;
+    }
+    .streak-1 { width: 55%; height: 1.5px; top: 25%; left: 20%; transform: rotate(-25deg); animation: streakGlow1 9s ease-in-out infinite; box-shadow: 0 0 15px 3px rgba(90, 150, 220, 0.4); }
+    .streak-2 { width: 40%; height: 1.5px; top: 55%; left: 40%; transform: rotate(15deg); animation: streakGlow2 11s ease-in-out infinite; box-shadow: 0 0 12px 2px rgba(90, 150, 220, 0.35); }
+    .streak-3 { width: 35%; height: 1px; top: 75%; left: 10%; transform: rotate(35deg); animation: streakGlow3 13s ease-in-out infinite; box-shadow: 0 0 12px 2px rgba(90, 150, 220, 0.4); }
+
+    @keyframes streakGlow1 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+    @keyframes streakGlow2 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.55; } }
+    @keyframes streakGlow3 { 0%, 100% { opacity: 0.08; } 50% { opacity: 0.4; } }
+
+    .starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -7;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(1px 1px at 8% 12%, rgba(232, 236, 242, 0.45), transparent),
+        radial-gradient(1px 1px at 22% 28%, rgba(232, 236, 242, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 38% 8%, rgba(90, 155, 212, 0.5), transparent),
+        radial-gradient(1px 1px at 52% 42%, rgba(232, 236, 242, 0.35), transparent),
+        radial-gradient(1.5px 1.5px at 68% 18%, rgba(70, 130, 180, 0.55), transparent),
+        radial-gradient(1px 1px at 82% 52%, rgba(232, 236, 242, 0.35), transparent),
+        radial-gradient(1px 1px at 12% 68%, rgba(232, 236, 242, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 32% 82%, rgba(90, 155, 212, 0.45), transparent);
+      animation: twinkleSoft 7s ease-in-out infinite;
+    }
+    @keyframes twinkleSoft { 0%, 100% { opacity: 0.6; } 50% { opacity: 0.3; } }
+
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #E8ECF2;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 3px #4A9BE8, 0 0 20px 6px rgba(70, 130, 180, 0.4);
+      top: 8%; left: -10%;
+      z-index: -6;
+      animation: shoot 25s linear infinite;
+      opacity: 0;
+    }
+    .shooting-star::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 150px; height: 1.5px;
+      background: linear-gradient(90deg, #4A9BE8, transparent);
+      transform: translateX(-100%);
+    }
+    @keyframes shoot {
+      0%   { transform: translate(0, 0); opacity: 0; }
+      4%   { opacity: 1; }
+      16%  { transform: translate(120vw, 50vh); opacity: 0; }
+      100% { transform: translate(120vw, 50vh); opacity: 0; }
+    }
+    .shooting-star.delay-1 { top: 40%; animation: shoot 35s linear infinite; animation-delay: 14s; }
+
+    h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; color: #E8ECF2; }
+    p { font-weight: 300; color: #B9C2D0; margin-bottom: 12px; }
+    strong { color: #E8ECF2; font-weight: 600; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(8, 17, 31, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.25);
+      z-index: 100;
+      box-shadow: 0 0 25px rgba(70, 150, 220, 0.12);
+    }
+    .logo { font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 3px; }
+    .logo a { color: #E8ECF2; text-decoration: none; }
+    .nav-links a { color: #B9C2D0; text-decoration: none; margin: 0 15px; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #E8ECF2; text-shadow: 0 0 10px rgba(90, 170, 240, 0.9); }
+    #lang-toggle {
+      background: rgba(20, 60, 120, 0.35);
+      border: 1px solid rgba(70, 140, 210, 0.5);
+      color: #E8ECF2;
+      padding: 6px 18px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      transition: 0.4s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(70, 150, 220, 0.2);
+    }
+    #lang-toggle:hover { 
+      background: rgba(70, 140, 210, 0.4); 
+      border-color: rgba(90, 170, 240, 0.8);
+      box-shadow: 0 8px 30px rgba(90, 170, 240, 0.5);
+    }
+
+    .page-container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 25px rgba(70, 150, 220, 0.6);
+      animation: titlePulse 7s ease-in-out infinite;
+    }
+    @keyframes titlePulse {
+      0%, 100% { text-shadow: 0 0 22px rgba(70, 150, 220, 0.6), 0 0 45px rgba(70, 150, 220, 0.3); }
+      50%      { text-shadow: 0 0 35px rgba(90, 170, 240, 0.85), 0 0 70px rgba(70, 150, 220, 0.5); }
+    }
+    .page-subtitle {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 1rem;
+      color: #8995A8;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      margin: 60px 0 30px 0;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.25);
+      color: #E8ECF2;
+      text-align: center;
+      text-shadow: 0 0 15px rgba(90, 170, 240, 0.6);
+    }
+
+    .format-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 25px;
+    }
+    .format-card {
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 14px;
+      transition: all 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 4px 20px rgba(70, 150, 220, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      animation: noteGlow 8s ease-in-out infinite;
+    }
+    @keyframes noteGlow {
+      0%, 100% { 
+        border-color: rgba(70, 140, 210, 0.35); 
+        box-shadow: 
+          0 20px 60px rgba(0, 0, 0, 0.5),
+          0 4px 20px rgba(70, 150, 220, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08); 
+      }
+      50%      { 
+        border-color: rgba(90, 170, 240, 0.55);  
+        box-shadow: 
+          0 25px 70px rgba(0, 0, 0, 0.55),
+          0 8px 35px rgba(90, 170, 240, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15); 
+      }
+    }
+    .format-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(90, 170, 240, 0.9);
+    }
+
+    .format-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: #8995A8;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+    .format-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      color: #E8ECF2;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(90, 170, 240, 0.5);
+    }
+    .format-duration {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: #8995A8;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+    .format-price {
+      display: inline-block;
+      padding: 10px 22px;
+      background: rgba(70, 140, 210, 0.25);
+      border: 1px solid rgba(90, 170, 240, 0.5);
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      color: #E8ECF2;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px rgba(90, 170, 240, 0.7);
+      align-self: flex-start;
+      border-radius: 6px;
+      box-shadow: 0 4px 20px rgba(70, 150, 220, 0.3);
+    }
+    .format-desc {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      flex: 1;
+    }
+
+    .availability-box {
+      background: rgba(5, 15, 35, 0.5);
+      border-left: 3px solid #4A9BE8;
+      padding: 18px 22px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+    }
+    .availability-box p { margin-bottom: 8px; }
+    .availability-box p:last-child { margin-bottom: 0; }
+
+    .steps-list {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    .steps-list li {
+      counter-increment: step;
+      position: relative;
+      padding: 20px 20px 20px 75px;
+      margin-bottom: 12px;
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.3);
+      backdrop-filter: blur(12px);
+      color: #B9C2D0;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    .steps-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 22px;
+      top: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(70, 140, 210, 0.4);
+      border: 1px solid rgba(90, 170, 240, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: #E8ECF2;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(90, 170, 240, 0.4);
+    }
+
+    .example-box {
+      background: rgba(70, 140, 210, 0.15);
+      border: 1px dashed rgba(90, 170, 240, 0.5);
+      padding: 12px 18px;
+      margin-top: 10px;
+      font-style: italic;
+      color: #B9C2D0;
+      font-size: 0.9rem;
+      border-radius: 6px;
+    }
+
+    .flow-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+      padding: 25px;
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    .flow-item {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: #E8ECF2;
+      padding: 10px 18px;
+      background: rgba(70, 140, 210, 0.25);
+      border: 1px solid rgba(90, 170, 240, 0.5);
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(70, 150, 220, 0.25);
+    }
+    .flow-arrow {
+      color: #4A9BE8;
+      font-size: 1.2rem;
+      text-shadow: 0 0 10px rgba(90, 170, 240, 0.8);
+    }
+
+    .rules-box {
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 45px;
+      margin-top: 30px;
+      border-radius: 14px;
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 4px 20px rgba(70, 150, 220, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .rules-box h2 {
+      text-align: center;
+      font-size: 1.35rem;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.25);
+      letter-spacing: 3px;
+      text-shadow: 0 0 15px rgba(90, 170, 240, 0.7);
+    }
+
+    .rule-item {
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.12);
+    }
+    .rule-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .rule-item:first-of-type { padding-top: 0; }
+
+    .rule-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: #E8ECF2;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(90, 170, 240, 0.5);
+    }
+    .rule-item p { font-size: 0.92rem; margin-bottom: 8px; }
+    .rule-item p:last-child { margin-bottom: 0; }
+
+    .rule-warning {
+      background: rgba(70, 140, 210, 0.15);
+      border-left: 3px solid #4A9BE8;
+      padding: 14px 18px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #E8ECF2;
+      border-radius: 6px;
+    }
+
+    .disclaimer {
+      margin-top: 40px;
+      padding: 25px;
+      background: rgba(5, 15, 35, 0.6);
+      border: 1px solid rgba(70, 140, 210, 0.2);
+      font-size: 0.85rem;
+      color: #8995A8;
+      font-style: italic;
+      text-align: center;
+      border-radius: 10px;
+      backdrop-filter: blur(12px);
+    }
+
+    .cta-wrapper { text-align: center; margin-top: 45px; }
+    .cta-btn {
+      display: inline-block;
+      padding: 16px 45px;
+      background: rgba(20, 60, 120, 0.35);
+      color: #E8ECF2;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 3px;
+      font-size: 0.95rem;
+      border: 1px solid rgba(90, 170, 240, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 10px;
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.35),
+        0 2px 12px rgba(70, 150, 220, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .cta-btn:hover {
+      background: rgba(70, 140, 210, 0.5);
+      border-color: rgba(90, 170, 240, 1);
+      box-shadow: 
+        0 15px 45px rgba(90, 170, 240, 0.7),
+        0 4px 20px rgba(70, 150, 220, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      letter-spacing: 4px;
+      transform: translateY(-3px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: rgba(5, 7, 13, 0.85); 
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(70, 140, 210, 0.2);
+      font-size: 0.8rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    body[dir="rtl"] { font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body[dir="rtl"] .steps-list li { padding: 20px 75px 20px 20px; }
+    body[dir="rtl"] .steps-list li::before { left: auto; right: 22px; }
+    body[dir="rtl"] .availability-box { border-left: none; border-right: 3px solid #4A9BE8; }
+    body[dir="rtl"] .rule-warning { border-left: none; border-right: 3px solid #4A9BE8; }
+
+    @media (max-width: 768px) {
+      .page-title { font-size: 1.9rem; }
+      .page-subtitle { font-size: 0.9rem; margin-bottom: 40px; }
+      .format-card, .rules-box { padding: 25px; border-radius: 12px; }
+      .format-grid { grid-template-columns: 1fr; }
+      .format-name { font-size: 1.2rem; }
+      .format-desc { font-size: 0.9rem; }
+      .section-title { font-size: 1.15rem; margin: 45px 0 25px 0; }
+      .steps-list li { padding: 18px 18px 18px 65px; font-size: 0.88rem; }
+      .steps-list li::before { width: 32px; height: 32px; font-size: 0.85rem; left: 18px; top: 18px; }
+      .rule-title { font-size: 0.92rem; }
+      .rule-item p { font-size: 0.86rem; }
+      .cta-btn { padding: 14px 32px; font-size: 0.85rem; letter-spacing: 2px; }
+      .flow-item { font-size: 0.8rem; padding: 8px 14px; }
+      nav { padding: 15px 20px; }
+      .nav-links { display: none; }
+      #lang-toggle { padding: 6px 14px; font-size: 0.75rem; }
+      .ribbon-1 { width: 500px; height: 400px; filter: blur(60px); top: -15%; left: -30%; opacity: 0.45; }
+      .ribbon-2 { width: 450px; height: 700px; filter: blur(60px); top: 5%; right: -35%; opacity: 0.4; }
+      .ribbon-3 { width: 550px; height: 450px; filter: blur(60px); bottom: -20%; left: -25%; opacity: 0.45; }
+      .ribbon-4 { width: 350px; height: 500px; filter: blur(60px); top: 35%; left: 20%; opacity: 0.25; }
+      .ribbon-5 { width: 400px; height: 350px; filter: blur(60px); bottom: -10%; right: -30%; opacity: 0.3; }
+      .shooting-star::after { width: 100px; }
+    }
+    @media (max-width: 420px) {
+      .page-title { font-size: 1.5rem; }
+      .format-name { font-size: 1.05rem; }
+      .format-price { font-size: 0.95rem; padding: 8px 18px; }
+      .cta-btn { padding: 12px 26px; font-size: 0.78rem; }
+      .steps-list li { font-size: 0.82rem; padding: 16px 16px 16px 60px; }
+      .steps-list li::before { width: 28px; height: 28px; font-size: 0.78rem; left: 16px; top: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="base-bg"></div>
+
+  <div class="ribbons">
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+    <div class="ribbon ribbon-3"></div>
+    <div class="ribbon ribbon-4"></div>
+    <div class="ribbon ribbon-5"></div>
+  </div>
+
+  <div class="streaks">
+    <div class="streak streak-1"></div>
+    <div class="streak streak-2"></div>
+    <div class="streak streak-3"></div>
+  </div>
+
+  <div class="starfield"></div>
+
+  <div class="shooting-star"></div>
+  <div class="shooting-star delay-1"></div>
+
+  <nav>
+    <div class="logo"><a href="index.html">LILITH'S ECLIPSE SERVICES</a></div>
+    <div class="nav-links">
+      <a href="courses.html" data-en="Courses" data-ar="الدورات">Courses</a>
+      <a href="sessions.html" class="active" data-en="Sessions" data-ar="الجلسات">Sessions</a>
+      <a href="hypnosis.html" data-en="Hypnosis" data-ar="التنويم الإيحائي">Hypnosis</a>
+      <a href="books.html" data-en="Books" data-ar="الكتب">Books</a>
+      <a href="payment.html" data-en="Payment" data-ar="طرق الدفع">Payment</a>
+      <a href="contact.html" data-en="Contact" data-ar="التواصل">Contact</a>
+    </div>
+    <button id="lang-toggle">AR | EN</button>
+  </nav>
+
+  <main class="page-container">
+    <h1 class="page-title" data-en="PRIVATE SESSIONS" data-ar="الجلسات الخاصة">PRIVATE SESSIONS</h1>
+    <p class="page-subtitle" data-en="Two formats. Availability depends on my schedule." data-ar="صيغتان. التوفر يعتمد على جدولي.">Two formats. Availability depends on my schedule.</p>
+
+    <div class="format-grid">
+      <div class="format-card">
+        <div class="format-label" data-en="FORMAT 01" data-ar="الصيغة 01">FORMAT 01</div>
+        <h2 class="format-name" data-en="CALL SESSION" data-ar="جلسة اتصال">CALL SESSION</h2>
+        <div class="format-duration" data-en="60 MINUTES" data-ar="60 دقيقة">60 MINUTES</div>
+        <div class="format-price">3,500 DA / $50</div>
+        <p class="format-desc" data-en="A live voice call session where we discuss the topic you've chosen in depth. A focused, real-time conversation." data-ar="جلسة اتصال صوتي مباشرة نناقش فيها الموضوع الذي اخترته بعمق. حوار مركّز في الوقت الفعلي.">A live voice call session where we discuss the topic you've chosen in depth. A focused, real-time conversation.</p>
+        <div class="availability-box">
+          <p data-en="Available between 1:00 PM and 7:00 PM, depending on availability." data-ar="متاحة بين الساعة الواحدة مساءً والسابعة مساءً، حسب التوفر.">Available between 1:00 PM and 7:00 PM, depending on availability.</p>
+          <p><strong data-en="Not every day is available." data-ar="ليست كل الأيام متاحة.">Not every day is available.</strong></p>
+        </div>
+      </div>
+
+      <div class="format-card">
+        <div class="format-label" data-en="FORMAT 02" data-ar="الصيغة 02">FORMAT 02</div>
+        <h2 class="format-name" data-en="MESSAGES + AUDIO" data-ar="رسائل + تسجيلات صوتية">MESSAGES + AUDIO</h2>
+        <div class="format-duration" data-en="90 MINUTES" data-ar="90 دقيقة">90 MINUTES</div>
+        <div class="format-price">2,500 DA / $30</div>
+        <p class="format-desc" data-en="A session conducted through text messages and voice recordings. Ideal if you prefer writing or are not comfortable with live calls." data-ar="جلسة تتم عبر الرسائل النصية والتسجيلات الصوتية. مثالية إذا كنتِ تفضلين الكتابة أو لا تفضلين الاتصال المباشر.">A session conducted through text messages and voice recordings. Ideal if you prefer writing or are not comfortable with live calls.</p>
+        <div class="availability-box">
+          <p data-en="Available between 1:00 PM and 7:00 PM, depending on availability." data-ar="متاحة بين الساعة الواحدة مساءً والسابعة مساءً، حسب التوفر.">Available between 1:00 PM and 7:00 PM, depending on availability.</p>
+          <p><strong data-en="Not every day is available." data-ar="ليست كل الأيام متاحة.">Not every day is available.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title" data-en="HOW TO BOOK" data-ar="كيفية الحجز">HOW TO BOOK</h2>
+
+    <ol class="steps-list">
+      <li>
+        <strong data-en="Contact me via Telegram." data-ar="تواصلي معي عبر Telegram.">Contact me via Telegram.</strong>
+        <br>@xlilithec
+      </li>
+      <li>
+        <span data-en="Tell me: what type of session you want, the day you would prefer, and the time you would prefer." data-ar="أخبريني: نوع الجلسة التي تريدينها، اليوم الذي تفضلينه، والوقت الذي تفضلينه.">Tell me: what type of session you want, the day you would prefer, and the time you would prefer.</span>
+        <div class="example-box" data-en="Example: &quot;I want a 60-minute call session. I would prefer Sunday at 4 PM.&quot;" data-ar="مثال: «أرغب في جلسة اتصال لمدة ساعة، وأفضل يوم الأحد على الساعة الرابعة مساءً.»">Example: "I want a 60-minute call session. I would prefer Sunday at 4 PM."</div>
+      </li>
+      <li data-en="I will tell you whether the suggested time works for me." data-ar="سأخبرك ما إذا كان الوقت المقترح يناسبني.">I will tell you whether the suggested time works for me.</li>
+      <li data-en="We discuss and agree on everything before the session." data-ar="نتناقش ونتفق على كل شيء قبل الجلسة.">We discuss and agree on everything before the session.</li>
+      <li>
+        <strong data-en="Payment is made before the session begins." data-ar="يتم الدفع قبل بدء الجلسة.">Payment is made before the session begins.</strong>
+      </li>
+      <li data-en="The session takes place at the agreed time." data-ar="تُعقد الجلسة في الوقت المتفق عليه.">The session takes place at the agreed time.</li>
+    </ol>
+
+    <h2 class="section-title" data-en="PAYMENT FLOW" data-ar="مسار الدفع">PAYMENT FLOW</h2>
+    <div class="flow-bar">
+      <span class="flow-item" data-en="CONTACT" data-ar="تواصل">CONTACT</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item" data-en="AGREE ON TIME" data-ar="اتفاق على الوقت">AGREE ON TIME</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item" data-en="PAYMENT" data-ar="دفع">PAYMENT</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-item" data-en="SESSION" data-ar="جلسة">SESSION</span>
+    </div>
+
+    <div class="cta-wrapper">
+      <a href="https://t.me/xlilithec" target="_blank" class="cta-btn" data-en="BOOK VIA TELEGRAM" data-ar="احجزي عبر Telegram">BOOK VIA TELEGRAM</a>
+    </div>
+
+    <div class="rules-box">
+      <h2 data-en="IMPORTANT — PLEASE READ BEFORE BOOKING" data-ar="مهم — يرجى قراءة القوانين قبل الحجز">IMPORTANT — PLEASE READ BEFORE BOOKING</h2>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="AGE" data-ar="العمر">AGE</div>
+        <p data-en="Sessions are for adults only." data-ar="الجلسات مخصصة للبالغين فقط.">Sessions are for adults only.</p>
+        <p data-en="I do not provide sessions to minors or anyone under the legal age." data-ar="لا أقدم جلسات للقاصرين أو لمن هم دون السن القانوني.">I do not provide sessions to minors or anyone under the legal age.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="INFIDELITY" data-ar="الخيانة">INFIDELITY</div>
+        <p data-en="I do not encourage or support marital or sexual infidelity in any form." data-ar="أنا لا أشجع الخيانة الزوجية أو الجنسية بأي شكل من الأشكال.">I do not encourage or support marital or sexual infidelity in any form.</p>
+        <p data-en="Calling a relationship 'spiritual' does not change this principle." data-ar="ولا أعتبر تسمية العلاقة 'روحية' سببًا يغيّر هذا المبدأ.">Calling a relationship "spiritual" does not change this principle.</p>
+        <p data-en="If you are married or in a relationship and are entering a relationship with someone else under any label, do not book a session with me to justify this relationship or get encouragement from me." data-ar="إذا كنتِ متزوجة أو مرتبطة وتدخلين في علاقة مع شخص آخر تحت أي تسمية، فلا تحجزي جلسة معي بهدف تبرير هذه العلاقة أو الحصول على تشجيع مني.">If you are married or in a relationship and are entering a relationship with someone else under any label, do not book a session with me to justify this relationship or get encouragement from me.</p>
+        <p data-en="A relationship is a bond built on challenges, not on infidelity." data-ar="علاقة شعلة مبنية على تحديات الصعاب وليس خيانات.">A relationship is a bond built on challenges, not on infidelity.</p>
+        <p data-en="Whatever your story, this is a clear principle for me and I hope it is respected." data-ar="مهما كانت قصتكِ، هذا مبدأ واضح بالنسبة لي وأتمنى احترامه.">Whatever your story, this is a clear principle for me and I hope it is respected.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="IF YOU ARE ALREADY CERTAIN" data-ar="إذا كنتِ متأكدة مسبقًا">IF YOU ARE ALREADY CERTAIN</div>
+        <p data-en="If you are already completely certain about your position or about your interpretation of the relationship, please do not book a diagnostic session with me." data-ar="إذا كنتِ متأكدة تمامًا من موقفكِ أو من تفسيركِ للعلاقة، فلا تحجزي جلسة تشخيص معي.">If you are already completely certain about your position or about your interpretation of the relationship, please do not book a diagnostic session with me.</p>
+        <p data-en="Do not book the session just to get an opinion that confirms an idea you have already decided." data-ar="لا تحجزي الجلسة فقط للحصول على رأي يؤكد فكرة قررتِها مسبقًا.">Do not book the session just to get an opinion that confirms an idea you have already decided.</p>
+        <p data-en="I do not provide sessions to confirm illusions, stories, or conclusions that have been decided in advance." data-ar="أنا لا أقدم جلسات لتأكيد الأوهام أو القصص أو الاستنتاجات التي تم حسمها مسبقًا.">I do not provide sessions to confirm illusions, stories, or conclusions that have been decided in advance.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="SEXUAL RELATIONSHIPS" data-ar="العلاقات الجنسية">SEXUAL RELATIONSHIPS</div>
+        <p data-en="If there is a sexual relationship between you and the person concerned, I do not offer a diagnostic session for that relationship." data-ar="إذا كانت هناك علاقة جنسية بينكِ وبين الشخص المعني، فلا أقدم جلسة تشخيص لهذه العلاقة.">If there is a sexual relationship between you and the person concerned, I do not offer a diagnostic session for that relationship.</p>
+        <p data-en="My position on this point is clear, so do not book in order to try to change it or convince me otherwise." data-ar="موقفي من هذه النقطة واضح، لذلك لا تحجزي بهدف محاولة تغييره أو إقناعي بعكسه.">My position on this point is clear, so do not book in order to try to change it or convince me otherwise.</p>
+        <p data-en="This is not because of religion at all — it is because of its course and its meaning." data-ar="و ليس بسبب الدين أبدًا بل بسبب مسارها ومفهومها.">This is not because of religion at all — it is because of its course and its meaning.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="DREAMS" data-ar="الأحلام">DREAMS</div>
+        <p data-en="Dream interpretation is NOT part of my sessions." data-ar="تفسير الأحلام ليس جزءًا من جلساتي.">Dream interpretation is NOT part of my sessions.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="SESSION SUBJECT" data-ar="موضوع الجلسة">SESSION SUBJECT</div>
+        <p data-en="The session is dedicated to the subject that was agreed upon." data-ar="الجلسة مخصصة للموضوع الذي تم الاتفاق عليه.">The session is dedicated to the subject that was agreed upon.</p>
+        <p data-en="I do not want the specified time turned into side conversations or topics unrelated to the session subject." data-ar="لا أريد تحويل الوقت المحدد إلى أحاديث جانبية أو مواضيع لا علاقة لها بموضوع الجلسة.">I do not want the specified time turned into side conversations or topics unrelated to the session subject.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="SESSION TIME" data-ar="مدة الجلسة">SESSION TIME</div>
+        <p data-en="Session duration is one hour." data-ar="مدة الجلسة ساعة واحدة.">Session duration is one hour.</p>
+        <p data-en="When the agreed time ends, the session ends. The session is not automatically extended." data-ar="عندما ينتهي الوقت المتفق عليه، تنتهي الجلسة. لا يتم تمديد الجلسة تلقائيًا.">When the agreed time ends, the session ends. The session is not automatically extended.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="PROVIDE RELEVANT DETAILS" data-ar="تقديم التفاصيل المهمة">PROVIDE RELEVANT DETAILS</div>
+        <p data-en="I want you to provide the important details I need clearly from the start." data-ar="أريد منكِ تقديم التفاصيل المهمة التي أحتاجها بوضوح منذ البداية.">I want you to provide the important details I need clearly from the start.</p>
+        <p data-en="Do not wait until the diagnostic session is over to remember fundamental details or change the scenario by adding essential information that was not mentioned earlier." data-ar="لا تنتظري حتى انتهاء التشخيص ثم تتذكري تفاصيل أساسية أو تغيّري السيناريو بإضافة معلومات جوهرية لم يتم ذكرها سابقًا.">Do not wait until the diagnostic session is over to remember fundamental details or change the scenario by adding essential information that was not mentioned earlier.</p>
+        <p data-en="Hiding essential information and adding it after the analysis is complete can change the data, and therefore I do not consider this a professional way of working." data-ar="إخفاء معلومات أساسية ثم إضافتها بعد انتهاء التحليل قد يغيّر المعطيات، ولذلك لا أعتبر هذه طريقة مهنية للعمل.">Hiding essential information and adding it after the analysis is complete can change the data, and therefore I do not consider this a professional way of working.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="OTHER GUIDES / OTHER SESSIONS" data-ar="مرشدات أخريات / جلسات أخرى">OTHER GUIDES / OTHER SESSIONS</div>
+        <p data-en="If you are currently working with another mentor, guide, or person on the same subject, I prefer that you do not mix multiple sessions and interpretations at the same time." data-ar="إذا كنتِ تعملين حاليًا مع مرشدة أو موجهة أو شخص آخر في الموضوع نفسه، فأنا أفضل ألا تخلطي عدة جلسات وتفسيرات في الوقت نفسه.">If you are currently working with another mentor, guide, or person on the same subject, I prefer that you do not mix multiple sessions and interpretations at the same time.</p>
+        <p data-en="Mixing multiple interpretations and opinions at the same time can confuse your thoughts and affect the way you present information, and may make the session less clear and the analysis more difficult." data-ar="خلط عدة تفسيرات وآراء في الوقت نفسه قد يربك أفكاركِ ويؤثر في طريقة طرحكِ للمعلومات، كما قد يجعل الجلسة أقل وضوحًا ويصعّب عملية التحليل.">Mixing multiple interpretations and opinions at the same time can confuse your thoughts and affect the way you present information, and may make the session less clear and the analysis more difficult.</p>
+        <p data-en="This is a professional boundary, not a statement that another practitioner is necessarily wrong." data-ar="هذا حد مهني، وليس بيانًا بأن ممارسًا آخر مخطئ بالضرورة.">This is a professional boundary, not a statement that another practitioner is necessarily wrong.</p>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-title" data-en="RESPECT IS REQUIRED" data-ar="الاحترام واجب">RESPECT IS REQUIRED</div>
+        <p data-en="I do not accept insults, profanity, deliberate provocation, threats, or starting a fight." data-ar="لا أقبل الإهانة أو الكلمات البذيئة أو الاستفزاز المتعمد أو التهديد أو افتعال الشجار.">I do not accept insults, profanity, deliberate provocation, threats, or starting a fight.</p>
+        <p data-en="You have the right to disagree with me, but you do not have the right to cross the boundaries of respect." data-ar="من حقكِ أن تختلفي معي، لكن ليس من حقكِ تجاوز حدود الاحترام.">You have the right to disagree with me, but you do not have the right to cross the boundaries of respect.</p>
+        <div class="rule-warning">
+          <p data-en="If disrespect continues, the session may be ended." data-ar="إذا استمر عدم الاحترام، قد يتم إنهاء الجلسة.">If disrespect continues, the session may be ended.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="disclaimer">
+      <p data-en="Private sessions are exploratory services and are not medical, psychiatric, psychological, or emergency care. No medical or psychiatric diagnosis is provided." data-ar="الجلسات الخاصة ذات طابع استكشافي، ولا تُعد رعاية طبية أو نفسية أو علاجًا نفسيًا أو خدمة طوارئ، ولا يتم تقديم تشخيص طبي أو نفسي من خلالها.">Private sessions are exploratory services and are not medical, psychiatric, psychological, or emergency care. No medical or psychiatric diagnosis is provided.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>LILITH'S ECLIPSE</p>
+    <p>Telegram: @xlilithec</p>
+    <p>© 2026 Lilith's Eclipse. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('lang-toggle');
+    const elementsToTranslate = document.querySelectorAll('[data-en]');
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function applyLanguage() {
+      if (currentLang === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+        document.documentElement.lang = 'ar';
+        elementsToTranslate.forEach(el => {
+          el.textContent = el.getAttribute('data-ar');
+        });
+        langToggle.textContent = 'EN | AR';
+      } else {
+        document.body.setAttribute('dir', 'ltr');
+        document.documentElement.lang = 'en';
+        elementsToTranslate.forEach(el => {
+          el.textContent = el.getAttribute('data-en');
+        });
+        langToggle.textContent = 'AR | EN';
+      }
+    }
+
+    applyLanguage();
+
+    langToggle.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      localStorage.setItem('lang', currentLang);
+      applyLanguage();
+    });
+  </script>
+</body>
+</html>

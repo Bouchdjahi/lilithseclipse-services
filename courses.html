@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses — Lilith's Eclipse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      color: #E8ECF2;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+      background: transparent;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .base-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -10;
+      background: radial-gradient(ellipse at 50% 50%, #071530 0%, #050E22 50%, #02060F 100%);
+    }
+
+    .ribbons {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -9;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .ribbon {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+    }
+    .ribbon-1 {
+      width: 900px; height: 700px;
+      background: radial-gradient(ellipse 60% 40% at 40% 50%, #2C6FB8 0%, #174C8A 30%, rgba(23, 76, 138, 0) 70%);
+      top: -20%; left: -20%;
+      animation: ribbonFloat1 25s ease-in-out infinite;
+    }
+    .ribbon-2 {
+      width: 800px; height: 1200px;
+      background: radial-gradient(ellipse 50% 50% at 50% 50%, #3A82CC 0%, #174C8A 40%, rgba(23, 76, 138, 0) 75%);
+      top: 5%; right: -25%;
+      animation: ribbonFloat2 30s ease-in-out infinite;
+      opacity: 0.45;
+    }
+    .ribbon-3 {
+      width: 1000px; height: 800px;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, #1E5EA8 0%, #0F3B70 40%, rgba(15, 59, 112, 0) 70%);
+      bottom: -25%; left: -15%;
+      animation: ribbonFloat3 32s ease-in-out infinite;
+      opacity: 0.5;
+    }
+    .ribbon-4 {
+      width: 700px; height: 900px;
+      background: radial-gradient(ellipse 40% 60% at 50% 50%, #4A8CD0 0%, #1E5EA8 35%, rgba(30, 94, 168, 0) 70%);
+      top: 30%; left: 25%;
+      opacity: 0.3;
+      animation: ribbonFloat4 40s ease-in-out infinite;
+    }
+    .ribbon-5 {
+      width: 800px; height: 700px;
+      background: radial-gradient(ellipse 55% 45% at 50% 50%, #2C6FB8 0%, #174C8A 40%, rgba(23, 76, 138, 0) 70%);
+      bottom: -15%; right: -20%;
+      opacity: 0.35;
+      animation: ribbonFloat5 38s ease-in-out infinite;
+    }
+
+    @keyframes ribbonFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      33%      { transform: translate(80px, 60px) scale(1.15) rotate(8deg); }
+      66%      { transform: translate(-40px, 100px) scale(1.05) rotate(-6deg); }
+    }
+    @keyframes ribbonFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50%      { transform: translate(-100px, 120px) scale(1.2) rotate(-10deg); }
+    }
+    @keyframes ribbonFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50%      { transform: translate(120px, -80px) scale(1.15) rotate(6deg); }
+    }
+    @keyframes ribbonFloat4 {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50%      { transform: translate(-45%, -55%) scale(1.35); }
+    }
+    @keyframes ribbonFloat5 {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50%      { transform: translate(-80px, -100px) scale(1.25) rotate(10deg); }
+    }
+
+    .streaks {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -8;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .streak {
+      position: absolute;
+      background: linear-gradient(90deg, transparent 0%, rgba(90, 150, 220, 0.65) 50%, transparent 100%);
+      filter: blur(2px);
+      opacity: 0.5;
+      border-radius: 50%;
+    }
+    .streak-1 { width: 55%; height: 1.5px; top: 25%; left: 20%; transform: rotate(-25deg); animation: streakGlow1 9s ease-in-out infinite; box-shadow: 0 0 15px 3px rgba(90, 150, 220, 0.4); }
+    .streak-2 { width: 40%; height: 1.5px; top: 55%; left: 40%; transform: rotate(15deg); animation: streakGlow2 11s ease-in-out infinite; box-shadow: 0 0 12px 2px rgba(90, 150, 220, 0.35); }
+    .streak-3 { width: 35%; height: 1px; top: 75%; left: 10%; transform: rotate(35deg); animation: streakGlow3 13s ease-in-out infinite; box-shadow: 0 0 12px 2px rgba(90, 150, 220, 0.4); }
+
+    @keyframes streakGlow1 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+    @keyframes streakGlow2 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.55; } }
+    @keyframes streakGlow3 { 0%, 100% { opacity: 0.08; } 50% { opacity: 0.4; } }
+
+    .starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -7;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(1px 1px at 8% 12%, rgba(232, 236, 242, 0.45), transparent),
+        radial-gradient(1px 1px at 22% 28%, rgba(232, 236, 242, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 38% 8%, rgba(90, 155, 212, 0.5), transparent),
+        radial-gradient(1px 1px at 52% 42%, rgba(232, 236, 242, 0.35), transparent),
+        radial-gradient(1.5px 1.5px at 68% 18%, rgba(70, 130, 180, 0.55), transparent),
+        radial-gradient(1px 1px at 82% 52%, rgba(232, 236, 242, 0.35), transparent),
+        radial-gradient(1px 1px at 12% 68%, rgba(232, 236, 242, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 32% 82%, rgba(90, 155, 212, 0.45), transparent);
+      animation: twinkleSoft 7s ease-in-out infinite;
+    }
+    @keyframes twinkleSoft { 0%, 100% { opacity: 0.6; } 50% { opacity: 0.3; } }
+
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #E8ECF2;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 3px #4A9BE8, 0 0 20px 6px rgba(70, 130, 180, 0.4);
+      top: 8%; left: -10%;
+      z-index: -6;
+      animation: shoot 25s linear infinite;
+      opacity: 0;
+    }
+    .shooting-star::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 150px; height: 1.5px;
+      background: linear-gradient(90deg, #4A9BE8, transparent);
+      transform: translateX(-100%);
+    }
+    @keyframes shoot {
+      0%   { transform: translate(0, 0); opacity: 0; }
+      4%   { opacity: 1; }
+      16%  { transform: translate(120vw, 50vh); opacity: 0; }
+      100% { transform: translate(120vw, 50vh); opacity: 0; }
+    }
+    .shooting-star.delay-1 { top: 40%; animation: shoot 35s linear infinite; animation-delay: 14s; }
+
+    h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; color: #E8ECF2; }
+    p { font-weight: 300; color: #B9C2D0; margin-bottom: 12px; }
+    strong { color: #E8ECF2; font-weight: 600; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(8, 17, 31, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.25);
+      z-index: 100;
+      box-shadow: 0 0 25px rgba(70, 150, 220, 0.12);
+    }
+    .logo { font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 3px; }
+    .logo a { color: #E8ECF2; text-decoration: none; }
+    .nav-links a { color: #B9C2D0; text-decoration: none; margin: 0 15px; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #E8ECF2; text-shadow: 0 0 10px rgba(90, 170, 240, 0.9); }
+    #lang-toggle {
+      background: rgba(20, 60, 120, 0.35);
+      border: 1px solid rgba(70, 140, 210, 0.5);
+      color: #E8ECF2;
+      padding: 6px 18px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      transition: 0.4s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(70, 150, 220, 0.2);
+    }
+    #lang-toggle:hover { 
+      background: rgba(70, 140, 210, 0.4); 
+      border-color: rgba(90, 170, 240, 0.8);
+      box-shadow: 0 8px 30px rgba(90, 170, 240, 0.5);
+    }
+
+    .page-container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 25px rgba(70, 150, 220, 0.6);
+      animation: titlePulse 7s ease-in-out infinite;
+    }
+    @keyframes titlePulse {
+      0%, 100% { text-shadow: 0 0 22px rgba(70, 150, 220, 0.6), 0 0 45px rgba(70, 150, 220, 0.3); }
+      50%      { text-shadow: 0 0 35px rgba(90, 170, 240, 0.85), 0 0 70px rgba(70, 150, 220, 0.5); }
+    }
+    .page-subtitle {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 1rem;
+      color: #8995A8;
+    }
+
+    .course-card {
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 45px;
+      margin-bottom: 35px;
+      border-radius: 14px;
+      transition: all 0.5s ease;
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 4px 20px rgba(70, 150, 220, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      animation: noteGlow 8s ease-in-out infinite;
+    }
+    @keyframes noteGlow {
+      0%, 100% { 
+        border-color: rgba(70, 140, 210, 0.35); 
+        box-shadow: 
+          0 20px 60px rgba(0, 0, 0, 0.5),
+          0 4px 20px rgba(70, 150, 220, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08); 
+      }
+      50%      { 
+        border-color: rgba(90, 170, 240, 0.55);  
+        box-shadow: 
+          0 25px 70px rgba(0, 0, 0, 0.55),
+          0 8px 35px rgba(90, 170, 240, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15); 
+      }
+    }
+    .course-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(90, 170, 240, 0.9);
+    }
+
+    .course-number {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: #8995A8;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+    .course-title-en {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+      color: #E8ECF2;
+      margin-bottom: 8px;
+      text-shadow: 0 0 15px rgba(90, 170, 240, 0.5);
+    }
+    .course-title-ar {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      font-size: 1.5rem;
+      color: #B9C2D0;
+      direction: rtl;
+      margin-bottom: 25px;
+    }
+    .course-desc {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      line-height: 1.8;
+    }
+    .course-desc-ar {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      font-size: 0.95rem;
+      direction: rtl;
+      text-align: right;
+      color: #B9C2D0;
+      padding: 20px;
+      background: rgba(5, 15, 35, 0.5);
+      border-right: 2px solid #4A9BE8;
+      margin-bottom: 25px;
+      line-height: 1.9;
+      border-radius: 6px;
+    }
+    .course-price {
+      display: inline-block;
+      padding: 10px 24px;
+      background: rgba(70, 140, 210, 0.25);
+      border: 1px solid rgba(90, 170, 240, 0.5);
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      letter-spacing: 1.5px;
+      color: #E8ECF2;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px rgba(90, 170, 240, 0.7);
+      border-radius: 6px;
+      box-shadow: 0 4px 20px rgba(70, 150, 220, 0.3);
+    }
+    .course-cta {
+      display: inline-block;
+      padding: 14px 35px;
+      background: rgba(20, 60, 120, 0.35);
+      color: #E8ECF2;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(90, 170, 240, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.35),
+        0 2px 12px rgba(70, 150, 220, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .course-cta:hover {
+      background: rgba(70, 140, 210, 0.5);
+      border-color: rgba(90, 170, 240, 1);
+      box-shadow: 
+        0 15px 45px rgba(90, 170, 240, 0.6),
+        0 4px 20px rgba(70, 150, 220, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      letter-spacing: 3px;
+      transform: translateY(-2px);
+    }
+
+    .rules-box {
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 45px;
+      margin-top: 60px;
+      border-radius: 14px;
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 4px 20px rgba(70, 150, 220, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .rules-box h2 {
+      text-align: center;
+      font-size: 1.35rem;
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.25);
+      text-shadow: 0 0 15px rgba(90, 170, 240, 0.7);
+    }
+    .rules-list { list-style: none; padding: 0; }
+    .rules-list li {
+      padding: 12px 0 12px 28px;
+      position: relative;
+      color: #B9C2D0;
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.1);
+    }
+    .rules-list li:last-child { border-bottom: none; }
+    .rules-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: #4A9BE8;
+      top: 16px;
+      text-shadow: 0 0 10px rgba(90, 170, 240, 0.9);
+    }
+    .rules-note {
+      margin-top: 25px;
+      padding: 18px 22px;
+      background: rgba(70, 140, 210, 0.15);
+      border-left: 3px solid #4A9BE8;
+      font-size: 0.88rem;
+      color: #B9C2D0;
+      font-style: italic;
+      line-height: 1.7;
+      border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: rgba(5, 7, 13, 0.85); 
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(70, 140, 210, 0.2);
+      font-size: 0.8rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    body[dir="rtl"] { font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body[dir="rtl"] .course-desc-ar { border-right: none; border-left: 2px solid #4A9BE8; text-align: right; }
+    body[dir="rtl"] .rules-list li { padding: 12px 28px 12px 0; }
+    body[dir="rtl"] .rules-list li::before { left: auto; right: 0; }
+    body[dir="rtl"] .rules-note { border-left: none; border-right: 3px solid #4A9BE8; }
+
+    @media (max-width: 768px) {
+      .page-container { padding: 50px 15px; }
+      .page-title { font-size: 1.9rem; }
+      .page-subtitle { font-size: 0.9rem; margin-bottom: 40px; }
+      .course-card, .rules-box { padding: 28px 22px; border-radius: 12px; }
+      .course-title-en { font-size: 1.3rem; }
+      .course-title-ar { font-size: 1.15rem; }
+      .course-desc, .course-desc-ar { font-size: 0.9rem; }
+      .course-desc-ar { padding: 16px; }
+      .course-cta { padding: 12px 26px; font-size: 0.78rem; letter-spacing: 1.5px; }
+      .rules-box h2 { font-size: 1.1rem; }
+      nav { padding: 15px 20px; }
+      .nav-links { display: none; }
+      #lang-toggle { padding: 6px 14px; font-size: 0.75rem; }
+      .ribbon-1 { width: 500px; height: 400px; filter: blur(60px); top: -15%; left: -30%; opacity: 0.45; }
+      .ribbon-2 { width: 450px; height: 700px; filter: blur(60px); top: 5%; right: -35%; opacity: 0.4; }
+      .ribbon-3 { width: 550px; height: 450px; filter: blur(60px); bottom: -20%; left: -25%; opacity: 0.45; }
+      .ribbon-4 { width: 350px; height: 500px; filter: blur(60px); top: 35%; left: 20%; opacity: 0.25; }
+      .ribbon-5 { width: 400px; height: 350px; filter: blur(60px); bottom: -10%; right: -30%; opacity: 0.3; }
+      .shooting-star::after { width: 100px; }
+    }
+    @media (max-width: 420px) {
+      .page-title { font-size: 1.5rem; }
+      .course-title-en { font-size: 1.15rem; }
+      .course-title-ar { font-size: 1rem; }
+      .course-desc, .course-desc-ar { font-size: 0.85rem; }
+      .course-cta { padding: 11px 22px; font-size: 0.72rem; }
+      .rules-box h2 { font-size: 1rem; }
+      .rules-list li { font-size: 0.85rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="base-bg"></div>
+
+  <div class="ribbons">
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+    <div class="ribbon ribbon-3"></div>
+    <div class="ribbon ribbon-4"></div>
+    <div class="ribbon ribbon-5"></div>
+  </div>
+
+  <div class="streaks">
+    <div class="streak streak-1"></div>
+    <div class="streak streak-2"></div>
+    <div class="streak streak-3"></div>
+  </div>
+
+  <div class="starfield"></div>
+
+  <div class="shooting-star"></div>
+  <div class="shooting-star delay-1"></div>
+
+  <nav>
+    <div class="logo"><a href="index.html">LILITH'S ECLIPSE SERVICES</a></div>
+    <div class="nav-links">
+      <a href="courses.html" class="active" data-en="Courses" data-ar="الدورات">Courses</a>
+      <a href="sessions.html" data-en="Sessions" data-ar="الجلسات">Sessions</a>
+      <a href="hypnosis.html" data-en="Hypnosis" data-ar="التنويم الإيحائي">Hypnosis</a>
+      <a href="books.html" data-en="Books" data-ar="الكتب">Books</a>
+      <a href="payment.html" data-en="Payment" data-ar="طرق الدفع">Payment</a>
+      <a href="contact.html" data-en="Contact" data-ar="التواصل">Contact</a>
+    </div>
+    <button id="lang-toggle">AR | EN</button>
+  </nav>
+
+  <main class="page-container">
+    <h1 class="page-title" data-en="COURSES" data-ar="الدورات">COURSES</h1>
+    <p class="page-subtitle" data-en="Choose a course and contact me on Telegram to receive it." data-ar="اختاري دورة وتواصلي معي عبر Telegram لاستلامها.">Choose a course and contact me on Telegram to receive it.</p>
+
+    <!-- COURSE 01 — SHADOW WORK -->
+    <div class="course-card">
+      <div class="course-number">01</div>
+      <h2 class="course-title-en" data-en="The Shadow Course" data-ar="دورة الظل">The Shadow Course</h2>
+      <div class="course-title-ar">دورة الظل</div>
+
+      <p class="course-desc" data-en="A complete journey into the shadow — understanding what it is, how it forms, how it affects your thoughts, emotions, behaviors, relationships, and inner world, and most importantly, how to face, understand, and integrate it." data-ar="رحلة متكاملة إلى عالم الظل — لفهم ماهيته، وكيف يتشكل، وكيف يؤثر في أفكارك ومشاعرك وسلوكياتك وعلاقاتك وعالمك الداخلي، والأهم من ذلك: كيف تواجهه، تفهمه، وتدمجه بدلًا من الهروب منه.">A complete journey into the shadow — understanding what it is, how it forms, how it affects your thoughts, emotions, behaviors, relationships, and inner world, and most importantly, how to face, understand, and integrate it.</p>
+
+      <div class="course-desc-ar">
+        رحلة متكاملة إلى عالم الظل — لفهم ماهيته، وكيف يتشكل، وكيف يؤثر في أفكارك ومشاعرك وسلوكياتك وعلاقاتك وعالمك الداخلي، والأهم من ذلك: كيف تواجهه، تفهمه، وتدمجه بدلًا من الهروب منه.
+        <br><br>
+        تتناول الدورة مختلف أنماط الظل وأوجهه، وتقدم طرقًا عملية لمواجهة ما يوجد في داخلك والتعامل معه بوعي.
+      </div>
+
+      <div class="course-price">5,000 DA / $50</div>
+      <br>
+      <a href="https://t.me/xlilithec" target="_blank" class="course-cta" data-en="CONTACT ME ON TELEGRAM" data-ar="تواصلي معي عبر Telegram">CONTACT ME ON TELEGRAM</a>
+    </div>
+
+    <!-- RULES -->
+    <div class="rules-box">
+      <h2 data-en="COURSE RULES" data-ar="قوانين الدورات">COURSE RULES</h2>
+      <ul class="rules-list">
+        <li data-en="Courses are for personal use only." data-ar="الدورات للاستخدام الشخصي فقط.">Courses are for personal use only.</li>
+        <li data-en="Do not share course materials with other people." data-ar="لا تشاركي مواد الدورة مع أشخاص آخرين.">Do not share course materials with other people.</li>
+        <li data-en="Do not redistribute, reproduce, upload, resell, or publish course materials elsewhere." data-ar="لا تعيدي نشر أو نسخ أو رفع أو بيع أو نشر مواد الدورة في أي مكان آخر.">Do not redistribute, reproduce, upload, resell, or publish course materials elsewhere.</li>
+        <li data-en="This includes audio, videos, PDFs, exercises, and private links." data-ar="يشمل ذلك الصوتيات والفيديوهات والملفات والتمارين والروابط الخاصة.">This includes audio, videos, PDFs, exercises, and private links.</li>
+        <li data-en="Private Telegram course links must not be shared." data-ar="يجب عدم مشاركة روابط دورات Telegram الخاصة.">Private Telegram course links must not be shared.</li>
+      </ul>
+      <div class="rules-note">
+        <p data-en="Violation of these rules may result in refusal of future access." data-ar="مخالفة هذه القوانين قد تؤدي إلى رفض الوصول في المستقبل.">Violation of these rules may result in refusal of future access.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>LILITH'S ECLIPSE</p>
+    <p>Telegram: @xlilithec</p>
+    <p>© 2026 Lilith's Eclipse. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('lang-toggle');
+    const elementsToTranslate = document.querySelectorAll('[data-en]');
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function applyLanguage() {
+      if (currentLang === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+        document.documentElement.lang = 'ar';
+        elementsToTranslate.forEach(el => {
+          el.textContent = el.getAttribute('data-ar');
+        });
+        langToggle.textContent = 'EN | AR';
+      } else {
+        document.body.setAttribute('dir', 'ltr');
+        document.documentElement.lang = 'en';
+        elementsToTranslate.forEach(el => {
+          el.textContent = el.getAttribute('data-en');
+        });
+        langToggle.textContent = 'AR | EN';
+      }
+    }
+
+    applyLanguage();
+
+    langToggle.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      localStorage.setItem('lang', currentLang);
+      applyLanguage();
+    });
+  </script>
+</body>
+</html>

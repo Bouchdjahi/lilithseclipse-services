@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalized Hypnosis — Lilith's Eclipse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      color: #E8ECF2;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+      background: transparent;
+      -webkit-tap-highlight-color: transparent;
+      padding-bottom: 160px;
+    }
+
+    .base-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -10;
+      background: radial-gradient(ellipse at 50% 50%, #071530 0%, #050E22 50%, #02060F 100%);
+    }
+
+    .ribbons {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -9;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .ribbon {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+    }
+    .ribbon-1 { width: 900px; height: 700px; background: radial-gradient(ellipse 60% 40% at 40% 50%, #2C6FB8 0%, #174C8A 30%, rgba(23, 76, 138, 0) 70%); top: -20%; left: -20%; animation: ribbonFloat1 25s ease-in-out infinite; }
+    .ribbon-2 { width: 800px; height: 1200px; background: radial-gradient(ellipse 50% 50% at 50% 50%, #3A82CC 0%, #174C8A 40%, rgba(23, 76, 138, 0) 75%); top: 5%; right: -25%; animation: ribbonFloat2 30s ease-in-out infinite; opacity: 0.45; }
+    .ribbon-3 { width: 1000px; height: 800px; background: radial-gradient(ellipse 60% 50% at 50% 50%, #1E5EA8 0%, #0F3B70 40%, rgba(15, 59, 112, 0) 70%); bottom: -25%; left: -15%; animation: ribbonFloat3 32s ease-in-out infinite; opacity: 0.5; }
+    .ribbon-4 { width: 700px; height: 900px; background: radial-gradient(ellipse 40% 60% at 50% 50%, #4A8CD0 0%, #1E5EA8 35%, rgba(30, 94, 168, 0) 70%); top: 30%; left: 25%; opacity: 0.3; animation: ribbonFloat4 40s ease-in-out infinite; }
+    .ribbon-5 { width: 800px; height: 700px; background: radial-gradient(ellipse 55% 45% at 50% 50%, #2C6FB8 0%, #174C8A 40%, rgba(23, 76, 138, 0) 70%); bottom: -15%; right: -20%; opacity: 0.35; animation: ribbonFloat5 38s ease-in-out infinite; }
+
+    @keyframes ribbonFloat1 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 33% { transform: translate(80px, 60px) scale(1.15) rotate(8deg); } 66% { transform: translate(-40px, 100px) scale(1.05) rotate(-6deg); } }
+    @keyframes ribbonFloat2 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(-100px, 120px) scale(1.2) rotate(-10deg); } }
+    @keyframes ribbonFloat3 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(120px, -80px) scale(1.15) rotate(6deg); } }
+    @keyframes ribbonFloat4 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-45%, -55%) scale(1.35); } }
+    @keyframes ribbonFloat5 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(-80px, -100px) scale(1.25) rotate(10deg); } }
+
+    .streaks {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -8;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .streak {
+      position: absolute;
+      background: linear-gradient(90deg, transparent 0%, rgba(90, 150, 220, 0.65) 50%, transparent 100%);
+      filter: blur(2px);
+      opacity: 0.5;
+      border-radius: 50%;
+    }
+    .streak-1 { width: 55%; height: 1.5px; top: 25%; left: 20%; transform: rotate(-25deg); animation: streakGlow1 9s ease-in-out infinite; box-shadow: 0 0 15px 3px rgba(90, 150, 220, 0.4); }
+    .streak-2 { width: 40%; height: 1.5px; top: 55%; left: 40%; transform: rotate(15deg); animation: streakGlow2 11s ease-in-out infinite; box-shadow: 0 0 12px 2px rgba(90, 150, 220, 0.35); }
+    .streak-3 { width: 35%; height: 1px; top: 75%; left: 10%; transform: rotate(35deg); animation: streakGlow3 13s ease-in-out infinite; box-shadow: 0 0 12px 2px rgba(90, 150, 220, 0.4); }
+
+    @keyframes streakGlow1 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
+    @keyframes streakGlow2 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.55; } }
+    @keyframes streakGlow3 { 0%, 100% { opacity: 0.08; } 50% { opacity: 0.4; } }
+
+    .starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -7;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(1px 1px at 8% 12%, rgba(232, 236, 242, 0.45), transparent),
+        radial-gradient(1px 1px at 22% 28%, rgba(232, 236, 242, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 38% 8%, rgba(90, 155, 212, 0.5), transparent),
+        radial-gradient(1px 1px at 52% 42%, rgba(232, 236, 242, 0.35), transparent),
+        radial-gradient(1.5px 1.5px at 68% 18%, rgba(70, 130, 180, 0.55), transparent),
+        radial-gradient(1px 1px at 82% 52%, rgba(232, 236, 242, 0.35), transparent),
+        radial-gradient(1px 1px at 12% 68%, rgba(232, 236, 242, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 32% 82%, rgba(90, 155, 212, 0.45), transparent);
+      animation: twinkleSoft 7s ease-in-out infinite;
+    }
+    @keyframes twinkleSoft { 0%, 100% { opacity: 0.6; } 50% { opacity: 0.3; } }
+
+    .shooting-star {
+      position: fixed;
+      width: 2px; height: 2px;
+      background: #E8ECF2;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 3px #4A9BE8, 0 0 20px 6px rgba(70, 130, 180, 0.4);
+      top: 8%; left: -10%;
+      z-index: -6;
+      animation: shoot 25s linear infinite;
+      opacity: 0;
+    }
+    .shooting-star::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 150px; height: 1.5px;
+      background: linear-gradient(90deg, #4A9BE8, transparent);
+      transform: translateX(-100%);
+    }
+    @keyframes shoot { 0% { transform: translate(0, 0); opacity: 0; } 4% { opacity: 1; } 16% { transform: translate(120vw, 50vh); opacity: 0; } 100% { transform: translate(120vw, 50vh); opacity: 0; } }
+    .shooting-star.delay-1 { top: 40%; animation: shoot 35s linear infinite; animation-delay: 14s; }
+
+    h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; color: #E8ECF2; }
+    p { font-weight: 300; color: #B9C2D0; margin-bottom: 15px; }
+    strong { color: #E8ECF2; font-weight: 600; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(8, 17, 31, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid rgba(70, 140, 210, 0.25);
+      z-index: 100;
+      box-shadow: 0 0 25px rgba(70, 150, 220, 0.12);
+    }
+    .logo { font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 3px; }
+    .logo a { color: #E8ECF2; text-decoration: none; }
+    .nav-links a { color: #B9C2D0; text-decoration: none; margin: 0 15px; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #E8ECF2; text-shadow: 0 0 10px rgba(90, 170, 240, 0.9); }
+    #lang-toggle {
+      background: rgba(20, 60, 120, 0.35);
+      border: 1px solid rgba(70, 140, 210, 0.5);
+      color: #E8ECF2;
+      padding: 6px 18px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      transition: 0.4s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(70, 150, 220, 0.2);
+    }
+    #lang-toggle:hover { background: rgba(70, 140, 210, 0.4); border-color: rgba(90, 170, 240, 0.8); box-shadow: 0 8px 30px rgba(90, 170, 240, 0.5); }
+
+    .page-container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 25px rgba(70, 150, 220, 0.6);
+      animation: titlePulse 7s ease-in-out infinite;
+    }
+    @keyframes titlePulse { 0%, 100% { text-shadow: 0 0 22px rgba(70, 150, 220, 0.6), 0 0 45px rgba(70, 150, 220, 0.3); } 50% { text-shadow: 0 0 35px rgba(90, 170, 240, 0.85), 0 0 70px rgba(70, 150, 220, 0.5); } }
+    .page-subtitle {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 1rem;
+      color: #8995A8;
+    }
+
+    .config-panel {
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      animation: noteGlow 8s ease-in-out infinite;
+    }
+    @keyframes noteGlow { 0%, 100% { border-color: rgba(70, 140, 210, 0.35); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08); } 50% { border-color: rgba(90, 170, 240, 0.55); box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55), 0 8px 35px rgba(90, 170, 240, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15); } }
+
+    .config-section { margin-bottom: 45px; padding-bottom: 35px; border-bottom: 1px solid rgba(70, 140, 210, 0.18); }
+    .config-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .config-label { font-family: 'Cinzel', serif; font-size: 0.8rem; color: #8995A8; letter-spacing: 3px; margin-bottom: 10px; }
+    .config-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      color: #E8ECF2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      text-shadow: 0 0 12px rgba(90, 170, 240, 0.5);
+    }
+    .value-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #E8ECF2;
+      background: rgba(70, 140, 210, 0.3);
+      border: 1px solid rgba(90, 170, 240, 0.5);
+      padding: 4px 14px;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(70, 150, 220, 0.25);
+    }
+    .config-hint { font-size: 0.85rem; color: #8995A8; font-style: italic; margin-bottom: 15px; line-height: 1.6; }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: rgba(5, 15, 35, 0.8);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      outline: none;
+      margin: 15px 0 5px 0;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      background: linear-gradient(135deg, #4A9BE8, #2C6FB8);
+      border: 2px solid #B9C2D0;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(90, 170, 240, 0.9), 0 0 40px rgba(70, 150, 220, 0.5);
+      transition: 0.2s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover { box-shadow: 0 0 30px rgba(90, 170, 240, 1), 0 0 60px rgba(70, 150, 220, 0.7); transform: scale(1.1); }
+    input[type="range"]::-moz-range-thumb {
+      width: 22px; height: 22px;
+      background: linear-gradient(135deg, #4A9BE8, #2C6FB8);
+      border: 2px solid #B9C2D0;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .slider-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: #8995A8; margin-top: 5px; }
+
+    .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      background: rgba(5, 15, 35, 0.6);
+      border: 1px solid rgba(70, 140, 210, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      color: #B9C2D0;
+      user-select: none;
+      position: relative;
+      border-radius: 8px;
+    }
+    .checkbox-item:hover { border-color: rgba(90, 170, 240, 0.7); background: rgba(70, 140, 210, 0.15); }
+    .checkbox-item.on { border-color: rgba(90, 170, 240, 0.9); background: rgba(70, 140, 210, 0.35); color: #E8ECF2; box-shadow: 0 0 20px rgba(90, 170, 240, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+    .checkbox-item input { position: absolute; opacity: 0; pointer-events: none; }
+    .checkbox-check {
+      width: 18px; height: 18px;
+      border: 1px solid rgba(90, 170, 240, 0.5);
+      margin-right: 12px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      position: relative;
+      border-radius: 4px;
+    }
+    .checkbox-item.on .checkbox-check { background: linear-gradient(135deg, #4A9BE8, #2C6FB8); border-color: #B9C2D0; box-shadow: 0 0 12px rgba(90, 170, 240, 0.7); }
+    .checkbox-item.on .checkbox-check::after { content: '✓'; color: #E8ECF2; font-size: 0.75rem; font-weight: bold; }
+
+    .radio-group { display: flex; flex-wrap: wrap; gap: 12px; }
+    .radio-item {
+      padding: 12px 22px;
+      background: rgba(5, 15, 35, 0.6);
+      border: 1px solid rgba(70, 140, 210, 0.3);
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #B9C2D0;
+      transition: 0.3s;
+      user-select: none;
+      position: relative;
+      border-radius: 8px;
+    }
+    .radio-item:hover { border-color: rgba(90, 170, 240, 0.7); background: rgba(70, 140, 210, 0.15); }
+    .radio-item.on { border-color: rgba(90, 170, 240, 0.9); background: rgba(70, 140, 210, 0.35); color: #E8ECF2; box-shadow: 0 0 20px rgba(90, 170, 240, 0.4); }
+    .radio-item input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .reason-note {
+      margin-top: 15px;
+      padding: 12px 18px;
+      background: rgba(70, 140, 210, 0.15);
+      border-left: 3px solid #4A9BE8;
+      font-size: 0.82rem;
+      color: #B9C2D0;
+      font-style: italic;
+      display: none;
+      line-height: 1.6;
+      border-radius: 6px;
+    }
+    .reason-note.active { display: block; }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      background: rgba(5, 15, 35, 0.7);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      color: #E8ECF2;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      resize: vertical;
+      border-radius: 8px;
+    }
+    textarea:focus, input[type="text"]:focus { outline: none; border-color: rgba(90, 170, 240, 0.9); box-shadow: 0 0 20px rgba(90, 170, 240, 0.4); }
+    .field-label { display: block; font-size: 0.9rem; color: #B9C2D0; margin-bottom: 8px; margin-top: 15px; }
+
+    .sticky-checkout {
+      position: fixed;
+      bottom: 0; left: 0;
+      width: 100%;
+      background: rgba(8, 17, 31, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(90, 170, 240, 0.4);
+      padding: 20px 40px;
+      z-index: 200;
+      box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(70, 150, 220, 0.2);
+    }
+    .checkout-inner { max-width: 950px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .checkout-summary { flex: 1; min-width: 250px; }
+    .checkout-summary .label { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #8995A8; letter-spacing: 3px; display: block; margin-bottom: 5px; }
+    .checkout-summary .total { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #E8ECF2; letter-spacing: 2px; text-shadow: 0 0 20px rgba(90, 170, 240, 0.8); }
+    .checkout-summary .breakdown { font-size: 0.72rem; color: #8995A8; margin-top: 5px; line-height: 1.5; }
+    .checkout-actions { display: flex; gap: 15px; align-items: center; }
+    .checkout-btn {
+      display: inline-block;
+      padding: 14px 35px;
+      background: rgba(20, 60, 120, 0.5);
+      color: #E8ECF2;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid rgba(90, 170, 240, 0.6);
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border-radius: 8px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), 0 2px 12px rgba(70, 150, 220, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .checkout-btn:hover { background: rgba(70, 140, 210, 0.6); border-color: rgba(90, 170, 240, 1); box-shadow: 0 15px 45px rgba(90, 170, 240, 0.7), 0 4px 20px rgba(70, 150, 220, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2); letter-spacing: 3px; transform: translateY(-2px); }
+
+    .rules-box {
+      background: rgba(10, 25, 55, 0.55);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 40px;
+      margin-top: 40px;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .rules-box h2 { text-align: center; font-size: 1.3rem; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(70, 140, 210, 0.25); text-shadow: 0 0 15px rgba(90, 170, 240, 0.7); }
+    .rules-list { list-style: none; padding: 0; }
+    .rules-list li { padding: 10px 0 10px 25px; position: relative; color: #B9C2D0; font-size: 0.95rem; }
+    .rules-list li::before { content: "✦"; position: absolute; left: 0; color: #4A9BE8; top: 14px; text-shadow: 0 0 10px rgba(90, 170, 240, 0.9); }
+    .privacy-note { margin-top: 25px; padding: 18px; background: rgba(70, 140, 210, 0.15); border-left: 3px solid #4A9BE8; font-size: 0.85rem; color: #B9C2D0; font-style: italic; border-radius: 6px; }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(2, 6, 15, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 500;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: rgba(10, 25, 55, 0.95);
+      border: 1px solid rgba(90, 170, 240, 0.5);
+      padding: 40px;
+      max-width: 620px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 14px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 60px rgba(70, 150, 220, 0.4);
+    }
+    .modal-box h2 { text-align: center; margin-bottom: 25px; font-size: 1.3rem; letter-spacing: 2px; text-shadow: 0 0 15px rgba(90, 170, 240, 0.7); }
+    .modal-actions { display: flex; gap: 15px; margin-top: 25px; }
+    .modal-actions button { flex: 1; padding: 12px; font-family: 'Cinzel', serif; letter-spacing: 1px; cursor: pointer; font-size: 0.85rem; transition: 0.3s; border-radius: 8px; }
+    .btn-confirm { background: rgba(20, 60, 120, 0.6); color: #E8ECF2; border: 1px solid rgba(90, 170, 240, 0.6); box-shadow: 0 4px 20px rgba(70, 150, 220, 0.3); }
+    .btn-confirm:hover { background: rgba(70, 140, 210, 0.8); box-shadow: 0 8px 30px rgba(90, 170, 240, 0.6); }
+    .btn-cancel { background: transparent; color: #8995A8; border: 1px solid rgba(137, 149, 168, 0.4); }
+    .btn-cancel:hover { color: #E8ECF2; border-color: #B9C2D0; }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: rgba(5, 7, 13, 0.85); 
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(70, 140, 210, 0.2);
+      font-size: 0.8rem;
+    }
+
+    body[dir="rtl"] { font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body[dir="rtl"] .rules-list li { padding: 10px 25px 10px 0; }
+    body[dir="rtl"] .rules-list li::before { left: auto; right: 0; }
+    body[dir="rtl"] .privacy-note { border-left: none; border-right: 3px solid #4A9BE8; }
+    body[dir="rtl"] .reason-note { border-left: none; border-right: 3px solid #4A9BE8; }
+    body[dir="rtl"] .sticky-checkout { direction: rtl; }
+    body[dir="rtl"] .checkbox-check { margin-right: 0; margin-left: 12px; }
+
+    @media (max-width: 768px) {
+      .page-title { font-size: 1.9rem; }
+      .page-subtitle { font-size: 0.9rem; margin-bottom: 40px; }
+      .config-panel, .rules-box { padding: 25px; border-radius: 12px; }
+      .config-title { font-size: 1rem; }
+      .config-hint { font-size: 0.8rem; }
+      .value-badge { font-size: 0.78rem; padding: 3px 10px; }
+      .checkbox-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+      .checkbox-item { padding: 12px 14px; font-size: 0.85rem; }
+      .radio-item { padding: 10px 18px; font-size: 0.85rem; }
+      nav { padding: 15px 20px; }
+      .nav-links { display: none; }
+      #lang-toggle { padding: 6px 14px; font-size: 0.75rem; }
+      .checkout-inner { flex-direction: column; text-align: center; }
+      .checkout-actions { width: 100%; }
+      .checkout-btn { width: 100%; padding: 14px; font-size: 0.85rem; }
+      .checkout-summary .total { font-size: 1.5rem; }
+      .sticky-checkout { padding: 18px 20px; }
+      .ribbon-1 { width: 500px; height: 400px; filter: blur(60px); top: -15%; left: -30%; opacity: 0.45; }
+      .ribbon-2 { width: 450px; height: 700px; filter: blur(60px); top: 5%; right: -35%; opacity: 0.4; }
+      .ribbon-3 { width: 550px; height: 450px; filter: blur(60px); bottom: -20%; left: -25%; opacity: 0.45; }
+      .ribbon-4 { width: 350px; height: 500px; filter: blur(60px); top: 35%; left: 20%; opacity: 0.25; }
+      .ribbon-5 { width: 400px; height: 350px; filter: blur(60px); bottom: -10%; right: -30%; opacity: 0.3; }
+      .shooting-star::after { width: 100px; }
+    }
+    @media (max-width: 420px) {
+      .page-title { font-size: 1.5rem; }
+      .config-panel, .rules-box { padding: 20px; }
+      .config-title { font-size: 0.95rem; }
+      .checkbox-grid { grid-template-columns: 1fr 1fr; }
+      .checkbox-item { padding: 10px 12px; font-size: 0.78rem; }
+      .radio-item { padding: 9px 14px; font-size: 0.8rem; }
+      .checkout-summary .total { font-size: 1.3rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="base-bg"></div>
+
+  <div class="ribbons">
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+    <div class="ribbon ribbon-3"></div>
+    <div class="ribbon ribbon-4"></div>
+    <div class="ribbon ribbon-5"></div>
+  </div>
+
+  <div class="streaks">
+    <div class="streak streak-1"></div>
+    <div class="streak streak-2"></div>
+    <div class="streak streak-3"></div>
+  </div>
+
+  <div class="starfield"></div>
+
+  <div class="shooting-star"></div>
+  <div class="shooting-star delay-1"></div>
+
+  <nav>
+    <div class="logo"><a href="index.html">LILITH'S ECLIPSE SERVICES</a></div>
+    <div class="nav-links">
+      <a href="courses.html" data-en="Courses" data-ar="الدورات">Courses</a>
+      <a href="sessions.html" data-en="Sessions" data-ar="الجلسات">Sessions</a>
+      <a href="hypnosis.html" class="active" data-en="Hypnosis" data-ar="التنويم الإيحائي">Hypnosis</a>
+      <a href="books.html" data-en="Books" data-ar="الكتب">Books</a>
+      <a href="payment.html" data-en="Payment" data-ar="طرق الدفع">Payment</a>
+      <a href="contact.html" data-en="Contact" data-ar="التواصل">Contact</a>
+    </div>
+    <button id="lang-toggle">AR | EN</button>
+  </nav>
+
+  <main class="page-container">
+    <h1 class="page-title" data-en="PERSONALIZED HYPNOSIS" data-ar="التنويم الإيحائي المخصص">PERSONALIZED HYPNOSIS</h1>
+    <p class="page-subtitle" data-en="Build your custom recording. Watch the price update in real time." data-ar="صممي تسجيلك المخصص. شاهدي السعر يتحدث في الوقت الفعلي.">Build your custom recording. Watch the price update in real time.</p>
+
+    <div class="config-panel">
+
+      <div class="config-section">
+        <div class="config-label" data-en="STEP 1" data-ar="الخطوة 1">STEP 1</div>
+        <div class="config-title">
+          <span data-en="Duration" data-ar="المدة">Duration</span>
+          <span class="value-badge" id="duration-badge">30 min</span>
+        </div>
+        <p class="config-hint" data-en="The base recording is 30 minutes. Longer recordings require more scripting, recording time, and audio production." data-ar="التسجيل الأساسي مدته 30 دقيقة. التسجيلات الأطول تتطلب كتابة ومدة تسجيل وإنتاج صوتي أكثر.">The base recording is 30 minutes. Longer recordings require more scripting, recording time, and audio production.</p>
+        <input type="range" id="duration" min="30" max="90" step="15" value="30">
+        <div class="slider-labels">
+          <span>30 min</span><span>45 min</span><span>60 min</span><span>75 min</span><span>90 min</span>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <div class="config-label" data-en="STEP 2" data-ar="الخطوة 2">STEP 2</div>
+        <div class="config-title">
+          <span data-en="Goals & Focus" data-ar="الأهداف والتركيز">Goals & Focus</span>
+          <span class="value-badge" id="goals-badge">0 selected</span>
+        </div>
+        <p class="config-hint" data-en="Each selected goal adds a new layer to the recording. Multiple goals mean more requests, more frequencies, more scripting, and a longer preparation process." data-ar="كل هدف تختارينه يضيف طبقة جديدة إلى التسجيل. الأهداف المتعددة تعني طلبات أكثر، ترددات أكثر، كتابة أكثر، وعملية تحضير أطول.">Each selected goal adds a new layer to the recording. Multiple goals mean more requests, more frequencies, more scripting, and a longer preparation process.</p>
+
+        <div class="checkbox-grid" id="goals-grid">
+          <label class="checkbox-item"><input type="checkbox" data-name="Detachment"><div class="checkbox-check"></div><span data-en="Detachment" data-ar="فك التعلق">Detachment</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Self-Love"><div class="checkbox-check"></div><span data-en="Self-Love" data-ar="حب الذات">Self-Love</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Self-Worth"><div class="checkbox-check"></div><span data-en="Self-Worth" data-ar="تقدير الذات">Self-Worth</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Confidence"><div class="checkbox-check"></div><span data-en="Confidence" data-ar="الثقة">Confidence</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Discipline"><div class="checkbox-check"></div><span data-en="Discipline" data-ar="الانضباط">Discipline</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Focus"><div class="checkbox-check"></div><span data-en="Focus" data-ar="التركيز">Focus</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Study"><div class="checkbox-check"></div><span data-en="Study" data-ar="الدراسة">Study</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Motivation"><div class="checkbox-check"></div><span data-en="Motivation" data-ar="التحفيز">Motivation</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Relaxation"><div class="checkbox-check"></div><span data-en="Relaxation" data-ar="الاسترخاء">Relaxation</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Sleep Routine"><div class="checkbox-check"></div><span data-en="Sleep Routine" data-ar="روتين النوم">Sleep Routine</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Creativity"><div class="checkbox-check"></div><span data-en="Creativity" data-ar="الإبداع">Creativity</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Emotional Calm"><div class="checkbox-check"></div><span data-en="Emotional Calm" data-ar="الهدوء العاطفي">Emotional Calm</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Personal Growth"><div class="checkbox-check"></div><span data-en="Personal Growth" data-ar="النمو الشخصي">Personal Growth</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Money Mindset"><div class="checkbox-check"></div><span data-en="Money Mindset" data-ar="عقلية المال">Money Mindset</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Custom Goal"><div class="checkbox-check"></div><span data-en="Custom Goal" data-ar="هدف مخصص">Custom Goal</span></label>
+        </div>
+
+        <div class="reason-note" id="goals-reason">
+          <span data-en="Multiple goals selected — this adds additional frequencies, multiple requests, and longer preparation time." data-ar="تم اختيار عدة أهداف — هذا يضيف ترددات إضافية، وطلبات متعددة، ووقت تحضير أطول.">Multiple goals selected — this adds additional frequencies, multiple requests, and longer preparation time.</span>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <div class="config-label" data-en="STEP 3" data-ar="الخطوة 3">STEP 3</div>
+        <div class="config-title">
+          <span data-en="Atmosphere" data-ar="الأجواء">Atmosphere</span>
+          <span class="value-badge" id="atmosphere-badge">0 selected</span>
+        </div>
+        <p class="config-hint" data-en="Choose your background atmosphere. One atmosphere is included for free. Choosing two or more requires layering multiple sounds and additional audio production." data-ar="اختاري أجواء الخلفية. جو واحد مجاني. اختيار جوين أو أكثر يتطلب دمج عدة أصوات وإنتاج صوتي إضافي.">Choose your background atmosphere. One atmosphere is included for free. Choosing two or more requires layering multiple sounds and additional audio production.</p>
+
+        <div class="checkbox-grid" id="atmosphere-grid">
+          <label class="checkbox-item"><input type="checkbox" data-name="Midnight"><div class="checkbox-check"></div><span data-en="Midnight" data-ar="منتصف الليل">Midnight</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Rain"><div class="checkbox-check"></div><span data-en="Rain" data-ar="مطر">Rain</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Night"><div class="checkbox-check"></div><span data-en="Night" data-ar="ليل">Night</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Cosmic"><div class="checkbox-check"></div><span data-en="Cosmic" data-ar="كوني">Cosmic</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Minimal"><div class="checkbox-check"></div><span data-en="Minimal" data-ar="بسيط">Minimal</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Forest"><div class="checkbox-check"></div><span data-en="Forest" data-ar="غابة">Forest</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Ocean"><div class="checkbox-check"></div><span data-en="Ocean" data-ar="محيط">Ocean</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Fire"><div class="checkbox-check"></div><span data-en="Fire" data-ar="نار">Fire</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Birds"><div class="checkbox-check"></div><span data-en="Birds" data-ar="أصوات العصافير">Birds</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Whales"><div class="checkbox-check"></div><span data-en="Whales" data-ar="أصوات الحيتان">Whales</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Wind"><div class="checkbox-check"></div><span data-en="Wind" data-ar="رياح">Wind</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Waterfall"><div class="checkbox-check"></div><span data-en="Waterfall" data-ar="شلال">Waterfall</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Stream"><div class="checkbox-check"></div><span data-en="Stream" data-ar="جدول ماء">Stream</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Storm"><div class="checkbox-check"></div><span data-en="Storm" data-ar="عاصفة">Storm</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Deep Space"><div class="checkbox-check"></div><span data-en="Deep Space" data-ar="الفضاء العميق">Deep Space</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Temple"><div class="checkbox-check"></div><span data-en="Temple" data-ar="معبد">Temple</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Cave"><div class="checkbox-check"></div><span data-en="Cave" data-ar="كهف">Cave</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Cathedral"><div class="checkbox-check"></div><span data-en="Cathedral" data-ar="كاتدرائية">Cathedral</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Pure Silence"><div class="checkbox-check"></div><span data-en="Pure Silence" data-ar="صمت تام">Pure Silence</span></label>
+          <label class="checkbox-item"><input type="checkbox" data-name="Custom Atmosphere"><div class="checkbox-check"></div><span data-en="Custom Atmosphere" data-ar="أجواء مخصصة">Custom Atmosphere</span></label>
+        </div>
+
+        <div class="reason-note" id="atmosphere-reason">
+          <span data-en="Multiple atmospheres selected — this requires layering several soundscapes together and additional audio production." data-ar="تم اختيار عدة أجواء — هذا يتطلب دمج عدة أصوات معًا وإنتاج صوتي إضافي.">Multiple atmospheres selected — this requires layering several soundscapes together and additional audio production.</span>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <div class="config-label" data-en="STEP 4" data-ar="الخطوة 4">STEP 4</div>
+        <div class="config-title">
+          <span data-en="Voice Pace" data-ar="وتيرة الصوت">Voice Pace</span>
+          <span class="value-badge" data-en="Free" data-ar="مجاني">Free</span>
+        </div>
+        <p class="config-hint" data-en="Choosing your preferred voice pace does not affect the price — it's just your preference." data-ar="اختيار وتيرة الصوت المفضلة لا يؤثر على السعر — إنه مجرد تفضيل شخصي.">Choosing your preferred voice pace does not affect the price — it's just your preference.</p>
+
+        <div class="radio-group" id="pace-group">
+          <label class="radio-item"><input type="radio" name="pace" value="Very Slow"><span data-en="Very Slow" data-ar="بطيء جدًا">Very Slow</span></label>
+          <label class="radio-item on"><input type="radio" name="pace" value="Slow" checked><span data-en="Slow" data-ar="بطيء">Slow</span></label>
+          <label class="radio-item"><input type="radio" name="pace" value="Normal"><span data-en="Normal" data-ar="عادي">Normal</span></label>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <div class="config-label" data-en="STEP 5" data-ar="الخطوة 5">STEP 5</div>
+        <div class="config-title">
+          <span data-en="Personal Request" data-ar="طلبك الشخصي">Personal Request</span>
+        </div>
+        <p class="config-hint" data-en="Tell me exactly what you want the recording to focus on. The more specific you are, the better I can tailor it." data-ar="أخبريني بالضبط بما تريدين أن يركز عليه التسجيل. كلما كنتِ أكثر تحديدًا، كان بإمكاني تخصيصه بشكل أفضل.">Tell me exactly what you want the recording to focus on. The more specific you are, the better I can tailor it.</p>
+        <textarea id="personal-request" rows="4" placeholder="Write here..." data-placeholder-en="Write here..." data-placeholder-ar="اكتبي هنا..."></textarea>
+      </div>
+
+      <div class="config-section">
+        <div class="config-label" data-en="STEP 6" data-ar="الخطوة 6">STEP 6</div>
+        <div class="config-title">
+          <span data-en="Your Contact Info" data-ar="معلومات التواصل">Your Contact Info</span>
+        </div>
+        <label class="field-label" data-en="Your Name" data-ar="اسمك">Your Name</label>
+        <input type="text" id="client-name" required>
+
+        <label class="field-label" data-en="Telegram or Email" data-ar="تليجرام أو إيميل">Telegram or Email</label>
+        <input type="text" id="client-contact" required>
+      </div>
+
+    </div>
+
+    <div class="rules-box">
+      <h2 data-en="BEFORE ORDERING" data-ar="قبل الطلب">BEFORE ORDERING</h2>
+      <ul class="rules-list">
+        <li data-en="This is a personalized audio service." data-ar="هذه خدمة صوتية مخصصة.">This is a personalized audio service.</li>
+        <li data-en="The recording is created according to the request submitted by the client." data-ar="يتم إنشاء التسجيل وفقًا للطلب الذي قدمه العميل.">The recording is created according to the request submitted by the client.</li>
+        <li data-en="The recording does not guarantee a specific outcome and does not replace medical or psychiatric care." data-ar="التسجيل لا يضمن نتيجة محددة ولا يحل محل الرعاية الطبية أو النفسية.">The recording does not guarantee a specific outcome and does not replace medical or psychiatric care.</li>
+        <li data-en="This is not an emergency service." data-ar="هذه ليست خدمة طوارئ.">This is not an emergency service.</li>
+      </ul>
+      <div class="privacy-note">
+        <p data-en="Your personal request is treated as private. Submissions are never displayed publicly." data-ar="طلبك الشخصي يُعامل بسرية. لا تُعرض الطلبات علنًا أبدًا.">Your personal request is treated as private. Submissions are never displayed publicly.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="sticky-checkout">
+    <div class="checkout-inner">
+      <div class="checkout-summary">
+        <span class="label" data-en="YOUR TOTAL" data-ar="الإجمالي">YOUR TOTAL</span>
+        <div class="total" id="total-price">1000 DA</div>
+        <div class="breakdown" id="breakdown" data-en="Base plan (30 min)" data-ar="الخطة الأساسية (30 دقيقة)">Base plan (30 min)</div>
+      </div>
+      <div class="checkout-actions">
+        <button class="checkout-btn" id="submit-btn" data-en="SEND MY REQUEST" data-ar="إرسال طلبي">SEND MY REQUEST</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <h2 data-en="REVIEW YOUR REQUEST" data-ar="مراجعة طلبك">REVIEW YOUR REQUEST</h2>
+      <div id="modal-content"></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="modal-cancel" data-en="CANCEL" data-ar="إلغاء">CANCEL</button>
+        <button class="btn-confirm" id="modal-confirm" data-en="SEND VIA TELEGRAM" data-ar="إرسال عبر Telegram">SEND VIA TELEGRAM</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>LILITH'S ECLIPSE</p>
+    <p>Telegram: @xlilithec</p>
+    <p>© 2026 Lilith's Eclipse. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('lang-toggle');
+    const elementsToTranslate = document.querySelectorAll('[data-en]');
+    const placeholders = document.querySelectorAll('[data-placeholder-en]');
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    const BASE_PRICE = 1000;
+    const MAX_PRICE = 3000;
+
+    const durationSlider = document.getElementById('duration');
+    const paceInputs = document.querySelectorAll('input[name="pace"]');
+    const goalsGrid = document.getElementById('goals-grid');
+    const atmosphereGrid = document.getElementById('atmosphere-grid');
+    const goalsReason = document.getElementById('goals-reason');
+    const atmosphereReason = document.getElementById('atmosphere-reason');
+    const totalEl = document.getElementById('total-price');
+    const breakdownEl = document.getElementById('breakdown');
+
+    function getSelected(grid) {
+      return Array.from(grid.querySelectorAll('input[type="checkbox"]:checked')).map(i => i.dataset.name);
+    }
+    function getPace() {
+      const checked = Array.from(paceInputs).find(i => i.checked);
+      return checked ? checked.value : 'Slow';
+    }
+
+    function updatePricing() {
+      const duration = parseInt(durationSlider.value);
+      const goals = getSelected(goalsGrid);
+      const atmospheres = getSelected(atmosphereGrid);
+
+      let price = BASE_PRICE;
+      let parts = [];
+
+      const durationSteps = (duration - 30) / 15;
+      const durationAdd = durationSteps * 150;
+      price += durationAdd;
+      if (durationAdd > 0) parts.push(`Duration +${durationAdd}`);
+
+      const goalsAdd = goals.length * 120;
+      price += goalsAdd;
+      if (goalsAdd > 0) parts.push(`Goals (${goals.length}) +${goalsAdd}`);
+
+      const atmAdd = atmospheres.length > 1 ? (atmospheres.length - 1) * 200 : 0;
+      price += atmAdd;
+      if (atmAdd > 0) parts.push(`Extra atmospheres +${atmAdd}`);
+
+      if (price > MAX_PRICE) price = MAX_PRICE;
+      if (price < BASE_PRICE) price = BASE_PRICE;
+
+      totalEl.textContent = price + ' DA';
+      document.getElementById('duration-badge').textContent = duration + ' min';
+      document.getElementById('goals-badge').textContent = goals.length + (currentLang === 'ar' ? ' محدد' : ' selected');
+      document.getElementById('atmosphere-badge').textContent = atmospheres.length + (currentLang === 'ar' ? ' محدد' : ' selected');
+
+      goalsReason.classList.toggle('active', goals.length > 1);
+      atmosphereReason.classList.toggle('active', atmospheres.length > 1);
+
+      breakdownEl.textContent = parts.length > 0 
+        ? parts.join(' · ') 
+        : (currentLang === 'ar' ? 'الخطة الأساسية (30 دقيقة)' : 'Base plan (30 min)');
+    }
+
+    durationSlider.addEventListener('input', updatePricing);
+    goalsGrid.querySelectorAll('input[type="checkbox"]').forEach(input => {
+      input.addEventListener('change', (e) => {
+        e.target.closest('.checkbox-item').classList.toggle('on', e.target.checked);
+        updatePricing();
+      });
+    });
+    atmosphereGrid.querySelectorAll('input[type="checkbox"]').forEach(input => {
+      input.addEventListener('change', (e) => {
+        e.target.closest('.checkbox-item').classList.toggle('on', e.target.checked);
+        updatePricing();
+      });
+    });
+    paceInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        document.querySelectorAll('#pace-group .radio-item').forEach(r => r.classList.remove('on'));
+        input.closest('.radio-item').classList.add('on');
+        updatePricing();
+      });
+    });
+
+    function applyLanguage() {
+      if (currentLang === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+        document.documentElement.lang = 'ar';
+        elementsToTranslate.forEach(el => {
+          if (el.id === 'total-price' || el.id === 'breakdown') return;
+          el.textContent = el.getAttribute('data-ar');
+        });
+        placeholders.forEach(el => {
+          el.placeholder = el.getAttribute('data-placeholder-ar');
+        });
+        langToggle.textContent = 'EN | AR';
+      } else {
+        document.body.setAttribute('dir', 'ltr');
+        document.documentElement.lang = 'en';
+        elementsToTranslate.forEach(el => {
+          if (el.id === 'total-price' || el.id === 'breakdown') return;
+          el.textContent = el.getAttribute('data-en');
+        });
+        placeholders.forEach(el => {
+          el.placeholder = el.getAttribute('data-placeholder-en');
+        });
+        langToggle.textContent = 'AR | EN';
+      }
+      updatePricing();
+    }
+    applyLanguage();
+
+    langToggle.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      localStorage.setItem('lang', currentLang);
+      applyLanguage();
+    });
+
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+    const modalConfirm = document.getElementById('modal-confirm');
+    const modalCancel = document.getElementById('modal-cancel');
+
+    function buildSummary() {
+      const name = document.getElementById('client-name').value.trim();
+      const contact = document.getElementById('client-contact').value.trim();
+      const request = document.getElementById('personal-request').value.trim();
+      const duration = durationSlider.value + ' min';
+      const pace = getPace();
+      const goals = getSelected(goalsGrid);
+      const atmospheres = getSelected(atmosphereGrid);
+      const total = totalEl.textContent;
+      return { name, contact, request, duration, pace, goals, atmospheres, total };
+    }
+
+    document.getElementById('submit-btn').addEventListener('click', () => {
+      const data = buildSummary();
+      if (!data.name || !data.contact) {
+        alert(currentLang === 'ar' ? 'يرجى إدخال الاسم ومعلومات التواصل.' : 'Please enter your name and contact info.');
+        return;
+      }
+      const summaryHTML = `
+        <div style="font-size:0.9rem; line-height:2;">
+          <div><strong>${currentLang === 'ar' ? 'الاسم' : 'Name'}:</strong> ${data.name}</div>
+          <div><strong>${currentLang === 'ar' ? 'التواصل' : 'Contact'}:</strong> ${data.contact}</div>
+          <div><strong>${currentLang === 'ar' ? 'المدة' : 'Duration'}:</strong> ${data.duration}</div>
+          <div><strong>${currentLang === 'ar' ? 'وتيرة الصوت' : 'Voice Pace'}:</strong> ${data.pace}</div>
+          <div><strong>${currentLang === 'ar' ? 'الأهداف' : 'Goals'}:</strong> ${data.goals.join(', ') || '—'}</div>
+          <div><strong>${currentLang === 'ar' ? 'الأجواء' : 'Atmospheres'}:</strong> ${data.atmospheres.join(', ') || '—'}</div>
+          <div><strong>${currentLang === 'ar' ? 'الطلب الشخصي' : 'Personal Request'}:</strong> ${data.request || '—'}</div>
+          <div style="margin-top:15px; font-size:1.3rem; font-family:Cinzel, serif; color:#E8ECF2;"><strong>${currentLang === 'ar' ? 'الإجمالي' : 'Total'}: ${data.total}</strong></div>
+        </div>
+      `;
+      modalContent.innerHTML = summaryHTML;
+      modal.classList.add('active');
+    });
+
+    modalCancel.addEventListener('click', () => modal.classList.remove('active'));
+
+    modalConfirm.addEventListener('click', () => {
+      const data = buildSummary();
+      const message = `*NEW HYPNOSIS REQUEST*\n\n*Name:* ${data.name}\n*Contact:* ${data.contact}\n*Duration:* ${data.duration}\n*Voice Pace:* ${data.pace}\n*Goals:* ${data.goals.join(', ') || '—'}\n*Atmospheres:* ${data.atmospheres.join(', ') || '—'}\n*Personal Request:* ${data.request || '—'}\n\n*TOTAL:* ${data.total}`;
+      navigator.clipboard.writeText(message).then(() => {
+        alert(currentLang === 'ar' ? 'تم نسخ الطلب! سيتم فتح Telegram.' : 'Request copied! Opening Telegram.');
+        window.open('https://t.me/xlilithec', '_blank');
+        modal.classList.remove('active');
+      }).catch(() => {
+        window.open('https://t.me/xlilithec', '_blank');
+        modal.classList.remove('active');
+      });
+    });
+
+    updatePricing();
+  </script>
+</body>
+</html>
