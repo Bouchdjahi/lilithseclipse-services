@@ -43,62 +43,17 @@
       opacity: 0.55;
       mix-blend-mode: screen;
     }
-    .ribbon-1 {
-      width: 900px; height: 700px;
-      background: radial-gradient(ellipse 60% 40% at 40% 50%, #2C6FB8 0%, #174C8A 30%, rgba(23, 76, 138, 0) 70%);
-      top: -20%; left: -20%;
-      animation: ribbonFloat1 25s ease-in-out infinite;
-    }
-    .ribbon-2 {
-      width: 800px; height: 1200px;
-      background: radial-gradient(ellipse 50% 50% at 50% 50%, #3A82CC 0%, #174C8A 40%, rgba(23, 76, 138, 0) 75%);
-      top: 5%; right: -25%;
-      animation: ribbonFloat2 30s ease-in-out infinite;
-      opacity: 0.45;
-    }
-    .ribbon-3 {
-      width: 1000px; height: 800px;
-      background: radial-gradient(ellipse 60% 50% at 50% 50%, #1E5EA8 0%, #0F3B70 40%, rgba(15, 59, 112, 0) 70%);
-      bottom: -25%; left: -15%;
-      animation: ribbonFloat3 32s ease-in-out infinite;
-      opacity: 0.5;
-    }
-    .ribbon-4 {
-      width: 700px; height: 900px;
-      background: radial-gradient(ellipse 40% 60% at 50% 50%, #4A8CD0 0%, #1E5EA8 35%, rgba(30, 94, 168, 0) 70%);
-      top: 30%; left: 25%;
-      opacity: 0.3;
-      animation: ribbonFloat4 40s ease-in-out infinite;
-    }
-    .ribbon-5 {
-      width: 800px; height: 700px;
-      background: radial-gradient(ellipse 55% 45% at 50% 50%, #2C6FB8 0%, #174C8A 40%, rgba(23, 76, 138, 0) 70%);
-      bottom: -15%; right: -20%;
-      opacity: 0.35;
-      animation: ribbonFloat5 38s ease-in-out infinite;
-    }
+    .ribbon-1 { width: 900px; height: 700px; background: radial-gradient(ellipse 60% 40% at 40% 50%, #2C6FB8 0%, #174C8A 30%, rgba(23, 76, 138, 0) 70%); top: -20%; left: -20%; animation: ribbonFloat1 25s ease-in-out infinite; }
+    .ribbon-2 { width: 800px; height: 1200px; background: radial-gradient(ellipse 50% 50% at 50% 50%, #3A82CC 0%, #174C8A 40%, rgba(23, 76, 138, 0) 75%); top: 5%; right: -25%; animation: ribbonFloat2 30s ease-in-out infinite; opacity: 0.45; }
+    .ribbon-3 { width: 1000px; height: 800px; background: radial-gradient(ellipse 60% 50% at 50% 50%, #1E5EA8 0%, #0F3B70 40%, rgba(15, 59, 112, 0) 70%); bottom: -25%; left: -15%; animation: ribbonFloat3 32s ease-in-out infinite; opacity: 0.5; }
+    .ribbon-4 { width: 700px; height: 900px; background: radial-gradient(ellipse 40% 60% at 50% 50%, #4A8CD0 0%, #1E5EA8 35%, rgba(30, 94, 168, 0) 70%); top: 30%; left: 25%; opacity: 0.3; animation: ribbonFloat4 40s ease-in-out infinite; }
+    .ribbon-5 { width: 800px; height: 700px; background: radial-gradient(ellipse 55% 45% at 50% 50%, #2C6FB8 0%, #174C8A 40%, rgba(23, 76, 138, 0) 70%); bottom: -15%; right: -20%; opacity: 0.35; animation: ribbonFloat5 38s ease-in-out infinite; }
 
-    @keyframes ribbonFloat1 {
-      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      33%      { transform: translate(80px, 60px) scale(1.15) rotate(8deg); }
-      66%      { transform: translate(-40px, 100px) scale(1.05) rotate(-6deg); }
-    }
-    @keyframes ribbonFloat2 {
-      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50%      { transform: translate(-100px, 120px) scale(1.2) rotate(-10deg); }
-    }
-    @keyframes ribbonFloat3 {
-      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50%      { transform: translate(120px, -80px) scale(1.15) rotate(6deg); }
-    }
-    @keyframes ribbonFloat4 {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      50%      { transform: translate(-45%, -55%) scale(1.35); }
-    }
-    @keyframes ribbonFloat5 {
-      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50%      { transform: translate(-80px, -100px) scale(1.25) rotate(10deg); }
-    }
+    @keyframes ribbonFloat1 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 33% { transform: translate(80px, 60px) scale(1.15) rotate(8deg); } 66% { transform: translate(-40px, 100px) scale(1.05) rotate(-6deg); } }
+    @keyframes ribbonFloat2 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(-100px, 120px) scale(1.2) rotate(-10deg); } }
+    @keyframes ribbonFloat3 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(120px, -80px) scale(1.15) rotate(6deg); } }
+    @keyframes ribbonFloat4 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-45%, -55%) scale(1.35); } }
+    @keyframes ribbonFloat5 { 0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(-80px, -100px) scale(1.25) rotate(10deg); } }
 
     .streaks {
       position: fixed;
@@ -161,12 +116,7 @@
       background: linear-gradient(90deg, #4A9BE8, transparent);
       transform: translateX(-100%);
     }
-    @keyframes shoot {
-      0%   { transform: translate(0, 0); opacity: 0; }
-      4%   { opacity: 1; }
-      16%  { transform: translate(120vw, 50vh); opacity: 0; }
-      100% { transform: translate(120vw, 50vh); opacity: 0; }
-    }
+    @keyframes shoot { 0% { transform: translate(0, 0); opacity: 0; } 4% { opacity: 1; } 16% { transform: translate(120vw, 50vh); opacity: 0; } 100% { transform: translate(120vw, 50vh); opacity: 0; } }
     .shooting-star.delay-1 { top: 40%; animation: shoot 35s linear infinite; animation-delay: 14s; }
 
     h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; color: #E8ECF2; }
@@ -204,36 +154,12 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 20px rgba(70, 150, 220, 0.2);
     }
-    #lang-toggle:hover { 
-      background: rgba(70, 140, 210, 0.4); 
-      border-color: rgba(90, 170, 240, 0.8);
-      box-shadow: 0 8px 30px rgba(90, 170, 240, 0.5);
-    }
+    #lang-toggle:hover { background: rgba(70, 140, 210, 0.4); border-color: rgba(90, 170, 240, 0.8); box-shadow: 0 8px 30px rgba(90, 170, 240, 0.5); }
 
-    .page-container {
-      max-width: 950px;
-      margin: 0 auto;
-      padding: 80px 20px;
-      position: relative;
-      z-index: 1;
-    }
-    .page-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      text-shadow: 0 0 25px rgba(70, 150, 220, 0.6);
-      animation: titlePulse 7s ease-in-out infinite;
-    }
-    @keyframes titlePulse {
-      0%, 100% { text-shadow: 0 0 22px rgba(70, 150, 220, 0.6), 0 0 45px rgba(70, 150, 220, 0.3); }
-      50%      { text-shadow: 0 0 35px rgba(90, 170, 240, 0.85), 0 0 70px rgba(70, 150, 220, 0.5); }
-    }
-    .page-subtitle {
-      text-align: center;
-      margin-bottom: 60px;
-      font-size: 1rem;
-      color: #8995A8;
-    }
+    .page-container { max-width: 950px; margin: 0 auto; padding: 80px 20px; position: relative; z-index: 1; }
+    .page-title { text-align: center; font-size: 2.5rem; margin-bottom: 15px; text-shadow: 0 0 25px rgba(70, 150, 220, 0.6); animation: titlePulse 7s ease-in-out infinite; }
+    @keyframes titlePulse { 0%, 100% { text-shadow: 0 0 22px rgba(70, 150, 220, 0.6), 0 0 45px rgba(70, 150, 220, 0.3); } 50% { text-shadow: 0 0 35px rgba(90, 170, 240, 0.85), 0 0 70px rgba(70, 150, 220, 0.5); } }
+    .page-subtitle { text-align: center; margin-bottom: 60px; font-size: 1rem; color: #8995A8; }
 
     .section-title {
       font-family: 'Cinzel', serif;
@@ -247,11 +173,7 @@
       text-shadow: 0 0 15px rgba(90, 170, 240, 0.6);
     }
 
-    .format-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 25px;
-    }
+    .format-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
     .format-card {
       background: rgba(10, 25, 55, 0.55);
       border: 1px solid rgba(70, 140, 210, 0.35);
@@ -262,166 +184,21 @@
       transition: all 0.5s ease;
       display: flex;
       flex-direction: column;
-      box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 4px 20px rgba(70, 150, 220, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       animation: noteGlow 8s ease-in-out infinite;
     }
-    @keyframes noteGlow {
-      0%, 100% { 
-        border-color: rgba(70, 140, 210, 0.35); 
-        box-shadow: 
-          0 20px 60px rgba(0, 0, 0, 0.5),
-          0 4px 20px rgba(70, 150, 220, 0.2),
-          inset 0 1px 0 rgba(255, 255, 255, 0.08); 
-      }
-      50%      { 
-        border-color: rgba(90, 170, 240, 0.55);  
-        box-shadow: 
-          0 25px 70px rgba(0, 0, 0, 0.55),
-          0 8px 35px rgba(90, 170, 240, 0.35),
-          inset 0 1px 0 rgba(255, 255, 255, 0.15); 
-      }
-    }
-    .format-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(90, 170, 240, 0.9);
-    }
+    @keyframes noteGlow { 0%, 100% { border-color: rgba(70, 140, 210, 0.35); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08); } 50% { border-color: rgba(90, 170, 240, 0.55); box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55), 0 8px 35px rgba(90, 170, 240, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15); } }
+    .format-card:hover { transform: translateY(-4px); border-color: rgba(90, 170, 240, 0.9); }
 
-    .format-label {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      color: #8995A8;
-      letter-spacing: 4px;
-      margin-bottom: 12px;
-    }
-    .format-name {
-      font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
-      color: #E8ECF2;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      text-shadow: 0 0 15px rgba(90, 170, 240, 0.5);
-    }
-    .format-duration {
-      font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
-      color: #8995A8;
-      letter-spacing: 3px;
-      margin-bottom: 20px;
-    }
-    .format-price {
-      display: inline-block;
-      padding: 10px 22px;
-      background: rgba(70, 140, 210, 0.25);
-      border: 1px solid rgba(90, 170, 240, 0.5);
-      font-family: 'Cinzel', serif;
-      font-size: 1.1rem;
-      letter-spacing: 1.5px;
-      color: #E8ECF2;
-      margin-bottom: 20px;
-      text-shadow: 0 0 15px rgba(90, 170, 240, 0.7);
-      align-self: flex-start;
-      border-radius: 6px;
-      box-shadow: 0 4px 20px rgba(70, 150, 220, 0.3);
-    }
-    .format-desc {
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-      flex: 1;
-    }
+    .format-label { font-family: 'Cinzel', serif; font-size: 0.8rem; color: #8995A8; letter-spacing: 4px; margin-bottom: 12px; }
+    .format-name { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #E8ECF2; letter-spacing: 1px; margin-bottom: 10px; text-shadow: 0 0 15px rgba(90, 170, 240, 0.5); }
+    .format-duration { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #8995A8; letter-spacing: 3px; margin-bottom: 20px; }
+    .format-price { display: inline-block; padding: 10px 22px; background: rgba(70, 140, 210, 0.25); border: 1px solid rgba(90, 170, 240, 0.5); font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 1.5px; color: #E8ECF2; margin-bottom: 20px; text-shadow: 0 0 15px rgba(90, 170, 240, 0.7); align-self: flex-start; border-radius: 6px; box-shadow: 0 4px 20px rgba(70, 150, 220, 0.3); }
+    .format-desc { font-size: 0.95rem; margin-bottom: 15px; flex: 1; }
 
-    .availability-box {
-      background: rgba(5, 15, 35, 0.5);
-      border-left: 3px solid #4A9BE8;
-      padding: 18px 22px;
-      margin-top: 15px;
-      font-size: 0.9rem;
-      border-radius: 6px;
-    }
+    .availability-box { background: rgba(5, 15, 35, 0.5); border-left: 3px solid #4A9BE8; padding: 18px 22px; margin-top: 15px; font-size: 0.9rem; border-radius: 6px; }
     .availability-box p { margin-bottom: 8px; }
     .availability-box p:last-child { margin-bottom: 0; }
-
-    .steps-list {
-      counter-reset: step;
-      list-style: none;
-      padding: 0;
-      margin-top: 20px;
-    }
-    .steps-list li {
-      counter-increment: step;
-      position: relative;
-      padding: 20px 20px 20px 75px;
-      margin-bottom: 12px;
-      background: rgba(10, 25, 55, 0.55);
-      border: 1px solid rgba(70, 140, 210, 0.3);
-      backdrop-filter: blur(12px);
-      color: #B9C2D0;
-      font-size: 0.95rem;
-      border-radius: 10px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-    .steps-list li::before {
-      content: counter(step);
-      position: absolute;
-      left: 22px;
-      top: 20px;
-      width: 36px;
-      height: 36px;
-      background: rgba(70, 140, 210, 0.4);
-      border: 1px solid rgba(90, 170, 240, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
-      color: #E8ECF2;
-      border-radius: 50%;
-      box-shadow: 0 0 15px rgba(90, 170, 240, 0.4);
-    }
-
-    .example-box {
-      background: rgba(70, 140, 210, 0.15);
-      border: 1px dashed rgba(90, 170, 240, 0.5);
-      padding: 12px 18px;
-      margin-top: 10px;
-      font-style: italic;
-      color: #B9C2D0;
-      font-size: 0.9rem;
-      border-radius: 6px;
-    }
-
-    .flow-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      margin-top: 20px;
-      padding: 25px;
-      background: rgba(10, 25, 55, 0.55);
-      border: 1px solid rgba(70, 140, 210, 0.3);
-      backdrop-filter: blur(12px);
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-    .flow-item {
-      font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      color: #E8ECF2;
-      padding: 10px 18px;
-      background: rgba(70, 140, 210, 0.25);
-      border: 1px solid rgba(90, 170, 240, 0.5);
-      border-radius: 6px;
-      box-shadow: 0 4px 15px rgba(70, 150, 220, 0.25);
-    }
-    .flow-arrow {
-      color: #4A9BE8;
-      font-size: 1.2rem;
-      text-shadow: 0 0 10px rgba(90, 170, 240, 0.8);
-    }
 
     .rules-box {
       background: rgba(10, 25, 55, 0.55);
@@ -431,62 +208,20 @@
       padding: 45px;
       margin-top: 30px;
       border-radius: 14px;
-      box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 4px 20px rgba(70, 150, 220, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(70, 150, 220, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
-    .rules-box h2 {
-      text-align: center;
-      font-size: 1.35rem;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(70, 140, 210, 0.25);
-      letter-spacing: 3px;
-      text-shadow: 0 0 15px rgba(90, 170, 240, 0.7);
-    }
+    .rules-box h2 { text-align: center; font-size: 1.35rem; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(70, 140, 210, 0.25); letter-spacing: 3px; text-shadow: 0 0 15px rgba(90, 170, 240, 0.7); }
 
-    .rule-item {
-      padding: 22px 0;
-      border-bottom: 1px solid rgba(70, 140, 210, 0.12);
-    }
+    .rule-item { padding: 22px 0; border-bottom: 1px solid rgba(70, 140, 210, 0.12); }
     .rule-item:last-child { border-bottom: none; padding-bottom: 0; }
     .rule-item:first-of-type { padding-top: 0; }
-
-    .rule-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      letter-spacing: 2px;
-      color: #E8ECF2;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      text-shadow: 0 0 10px rgba(90, 170, 240, 0.5);
-    }
+    .rule-title { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 2px; color: #E8ECF2; margin-bottom: 12px; text-transform: uppercase; text-shadow: 0 0 10px rgba(90, 170, 240, 0.5); }
     .rule-item p { font-size: 0.92rem; margin-bottom: 8px; }
     .rule-item p:last-child { margin-bottom: 0; }
 
-    .rule-warning {
-      background: rgba(70, 140, 210, 0.15);
-      border-left: 3px solid #4A9BE8;
-      padding: 14px 18px;
-      margin-top: 12px;
-      font-size: 0.9rem;
-      color: #E8ECF2;
-      border-radius: 6px;
-    }
+    .rule-warning { background: rgba(70, 140, 210, 0.15); border-left: 3px solid #4A9BE8; padding: 14px 18px; margin-top: 12px; font-size: 0.9rem; color: #E8ECF2; border-radius: 6px; }
 
-    .disclaimer {
-      margin-top: 40px;
-      padding: 25px;
-      background: rgba(5, 15, 35, 0.6);
-      border: 1px solid rgba(70, 140, 210, 0.2);
-      font-size: 0.85rem;
-      color: #8995A8;
-      font-style: italic;
-      text-align: center;
-      border-radius: 10px;
-      backdrop-filter: blur(12px);
-    }
+    .disclaimer { margin-top: 40px; padding: 25px; background: rgba(5, 15, 35, 0.6); border: 1px solid rgba(70, 140, 210, 0.2); font-size: 0.85rem; color: #8995A8; font-style: italic; text-align: center; border-radius: 10px; backdrop-filter: blur(12px); }
 
     .cta-wrapper { text-align: center; margin-top: 45px; }
     .cta-btn {
@@ -505,38 +240,53 @@
       cursor: pointer;
       text-transform: uppercase;
       border-radius: 10px;
-      box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.35),
-        0 2px 12px rgba(70, 150, 220, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), 0 2px 12px rgba(70, 150, 220, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
-    .cta-btn:hover {
-      background: rgba(70, 140, 210, 0.5);
-      border-color: rgba(90, 170, 240, 1);
-      box-shadow: 
-        0 15px 45px rgba(90, 170, 240, 0.7),
-        0 4px 20px rgba(70, 150, 220, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      letter-spacing: 4px;
-      transform: translateY(-3px);
+    .cta-btn:hover { background: rgba(70, 140, 210, 0.5); border-color: rgba(90, 170, 240, 1); box-shadow: 0 15px 45px rgba(90, 170, 240, 0.7), 0 4px 20px rgba(70, 150, 220, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2); letter-spacing: 4px; transform: translateY(-3px); }
+    .cta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .booking-form { margin-top: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+    .form-field { display: flex; flex-direction: column; }
+    .form-field label { display: block; font-size: 0.85rem; color: #8995A8; margin-bottom: 6px; letter-spacing: 0.5px; }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      padding: 12px;
+      background: rgba(5, 15, 35, 0.7);
+      border: 1px solid rgba(70, 140, 210, 0.35);
+      color: #E8ECF2;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: rgba(90, 170, 240, 0.9);
+      box-shadow: 0 0 15px rgba(90, 170, 240, 0.35);
+    }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+    .form-notice {
+      margin-bottom: 18px;
+      padding: 14px 18px;
+      background: rgba(70, 140, 210, 0.15);
+      border-left: 3px solid #4A9BE8;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #B9C2D0;
+      line-height: 1.6;
     }
 
-    footer {
-      text-align: center;
-      padding: 40px;
-      background: rgba(5, 7, 13, 0.85); 
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(70, 140, 210, 0.2);
-      font-size: 0.8rem;
-      position: relative;
-      z-index: 10;
-    }
+    footer { text-align: center; padding: 40px; background: rgba(5, 7, 13, 0.85); backdrop-filter: blur(10px); border-top: 1px solid rgba(70, 140, 210, 0.2); font-size: 0.8rem; position: relative; z-index: 10; }
 
     body[dir="rtl"] { font-family: 'Segoe UI', Tahoma, sans-serif; }
-    body[dir="rtl"] .steps-list li { padding: 20px 75px 20px 20px; }
-    body[dir="rtl"] .steps-list li::before { left: auto; right: 22px; }
     body[dir="rtl"] .availability-box { border-left: none; border-right: 3px solid #4A9BE8; }
     body[dir="rtl"] .rule-warning { border-left: none; border-right: 3px solid #4A9BE8; }
+    body[dir="rtl"] .form-notice { border-left: none; border-right: 3px solid #4A9BE8; }
 
     @media (max-width: 768px) {
       .page-title { font-size: 1.9rem; }
@@ -546,15 +296,13 @@
       .format-name { font-size: 1.2rem; }
       .format-desc { font-size: 0.9rem; }
       .section-title { font-size: 1.15rem; margin: 45px 0 25px 0; }
-      .steps-list li { padding: 18px 18px 18px 65px; font-size: 0.88rem; }
-      .steps-list li::before { width: 32px; height: 32px; font-size: 0.85rem; left: 18px; top: 18px; }
       .rule-title { font-size: 0.92rem; }
       .rule-item p { font-size: 0.86rem; }
       .cta-btn { padding: 14px 32px; font-size: 0.85rem; letter-spacing: 2px; }
-      .flow-item { font-size: 0.8rem; padding: 8px 14px; }
       nav { padding: 15px 20px; }
       .nav-links { display: none; }
       #lang-toggle { padding: 6px 14px; font-size: 0.75rem; }
+      .form-row { grid-template-columns: 1fr; gap: 14px; }
       .ribbon-1 { width: 500px; height: 400px; filter: blur(60px); top: -15%; left: -30%; opacity: 0.45; }
       .ribbon-2 { width: 450px; height: 700px; filter: blur(60px); top: 5%; right: -35%; opacity: 0.4; }
       .ribbon-3 { width: 550px; height: 450px; filter: blur(60px); bottom: -20%; left: -25%; opacity: 0.45; }
@@ -567,8 +315,6 @@
       .format-name { font-size: 1.05rem; }
       .format-price { font-size: 0.95rem; padding: 8px 18px; }
       .cta-btn { padding: 12px 26px; font-size: 0.78rem; }
-      .steps-list li { font-size: 0.82rem; padding: 16px 16px 16px 60px; }
-      .steps-list li::before { width: 28px; height: 28px; font-size: 0.78rem; left: 16px; top: 16px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -645,30 +391,90 @@
       </div>
     </div>
 
-    <h2 class="section-title" data-en="HOW TO BOOK" data-ar="كيفية الحجز">HOW TO BOOK</h2>
+    <h2 class="section-title" data-en="BOOK A SESSION" data-ar="احجزي جلسة">BOOK A SESSION</h2>
 
-    <ol class="steps-list">
-      <li>
-        <strong data-en="Contact me via Telegram." data-ar="تواصلي معي عبر Telegram.">Contact me via Telegram.</strong>
-        <br>@xlilithec
-      </li>
-      <li>
-        <span data-en="Tell me: what type of session you want, the day you would prefer, and the time you would prefer." data-ar="أخبريني: نوع الجلسة التي تريدينها، اليوم الذي تفضلينه، والوقت الذي تفضلينه.">Tell me: what type of session you want, the day you would prefer, and the time you would prefer.</span>
-        <div class="example-box" data-en="Example: &quot;I want a 60-minute call session. I would prefer Sunday at 4 PM.&quot;" data-ar="مثال: «أرغب في جلسة اتصال لمدة ساعة، وأفضل يوم الأحد على الساعة الرابعة مساءً.»">Example: "I want a 60-minute call session. I would prefer Sunday at 4 PM."</div>
-      </li>
-      <li data-en="I will tell you whether the suggested time works for me." data-ar="سأخبرك ما إذا كان الوقت المقترح يناسبني.">I will tell you whether the suggested time works for me.</li>
-      <li data-en="We discuss and agree on everything before the session." data-ar="نتناقش ونتفق على كل شيء قبل الجلسة.">We discuss and agree on everything before the session.</li>
-      <li>
-        <strong data-en="Payment is made before the session begins." data-ar="يتم الدفع قبل بدء الجلسة.">Payment is made before the session begins.</strong>
-      </li>
-      <li data-en="The session takes place at the agreed time." data-ar="تُعقد الجلسة في الوقت المتفق عليه.">The session takes place at the agreed time.</li>
-    </ol>
+    <div class="rules-box booking-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+          <input type="text" id="sess-name">
+        </div>
+        <div class="form-field">
+          <label data-en="Telegram or Email" data-ar="تليجرام أو إيميل">Telegram or Email</label>
+          <input type="text" id="sess-contact">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label data-en="Session Type" data-ar="نوع الجلسة">Session Type</label>
+          <select id="sess-type">
+            <option value="Diagnosis / Analysis" data-en="Diagnosis / Analysis" data-ar="تشخيص / تحليل">Diagnosis / Analysis</option>
+            <option value="Spiritual / Energetic Awakening" data-en="Spiritual / Energetic Awakening" data-ar="صحوة روحية / طاقية">Spiritual / Energetic Awakening</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label data-en="Format" data-ar="الصيغة">Format</label>
+          <select id="sess-format">
+            <option value="Call — 60 min — 3,500 DA" data-en="Call — 60 min — 3,500 DA" data-ar="مكالمة — 60 دقيقة — 3,500 دج">Call — 60 min — 3,500 DA</option>
+            <option value="Messages + Audio — 90 min — 2,500 DA" data-en="Messages + Audio — 90 min — 2,500 DA" data-ar="رسائل + صوت — 90 دقيقة — 2,500 دج">Messages + Audio — 90 min — 2,500 DA</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label data-en="Preferred Date" data-ar="التاريخ المفضل">Preferred Date</label>
+          <input type="date" id="sess-date">
+        </div>
+        <div class="form-field">
+          <label data-en="Preferred Time" data-ar="الوقت المفضل">Preferred Time</label>
+          <select id="sess-time">
+            <option value="1:00 PM">1:00 PM</option>
+            <option value="2:00 PM">2:00 PM</option>
+            <option value="3:00 PM">3:00 PM</option>
+            <option value="4:00 PM">4:00 PM</option>
+            <option value="5:00 PM">5:00 PM</option>
+            <option value="6:00 PM">6:00 PM</option>
+            <option value="7:00 PM">7:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label data-en="Payment Method" data-ar="طريقة الدفع">Payment Method</label>
+          <select id="sess-payment">
+            <option value="BaridiMob">BaridiMob</option>
+            <option value="Binance">Binance</option>
+            <option value="Payoneer">Payoneer</option>
+            <option value="RedotPay">RedotPay</option>
+            <option value="Visa — COMING SOON" disabled data-en="Visa — COMING SOON" data-ar="Visa — قريبًا">Visa — COMING SOON</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label data-en="Payment Reference (optional)" data-ar="مرجع الدفع (اختياري)">Payment Reference (optional)</label>
+          <input type="text" id="sess-reference">
+        </div>
+      </div>
+
+      <div class="form-field" style="margin-bottom:18px;">
+        <label data-en="Additional Notes (optional)" data-ar="ملاحظات إضافية (اختياري)">Additional Notes (optional)</label>
+        <textarea id="sess-notes" rows="3"></textarea>
+      </div>
+
+      <div class="form-notice">
+        <span data-en="Booking is not immediate. Your request will be reviewed and confirmed manually via Telegram." data-ar="الحجز ليس فوريًا. سيتم مراجعة طلبك وتأكيده يدويًا عبر Telegram.">Booking is not immediate. Your request will be reviewed and confirmed manually via Telegram.</span>
+      </div>
+
+      <button id="sess-submit" class="cta-btn" style="width:100%;" data-en="SEND BOOKING REQUEST" data-ar="إرسال طلب الحجز">SEND BOOKING REQUEST</button>
+    </div>
 
     <h2 class="section-title" data-en="PAYMENT FLOW" data-ar="مسار الدفع">PAYMENT FLOW</h2>
     <div class="flow-bar">
-      <span class="flow-item" data-en="CONTACT" data-ar="تواصل">CONTACT</span>
+      <span class="flow-item" data-en="BOOKING" data-ar="حجز">BOOKING</span>
       <span class="flow-arrow">→</span>
-      <span class="flow-item" data-en="AGREE ON TIME" data-ar="اتفاق على الوقت">AGREE ON TIME</span>
+      <span class="flow-item" data-en="CONFIRMATION" data-ar="تأكيد">CONFIRMATION</span>
       <span class="flow-arrow">→</span>
       <span class="flow-item" data-en="PAYMENT" data-ar="دفع">PAYMENT</span>
       <span class="flow-arrow">→</span>
@@ -676,7 +482,7 @@
     </div>
 
     <div class="cta-wrapper">
-      <a href="https://t.me/xlilithec" target="_blank" class="cta-btn" data-en="BOOK VIA TELEGRAM" data-ar="احجزي عبر Telegram">BOOK VIA TELEGRAM</a>
+      <a href="https://t.me/xlilithec" target="_blank" class="cta-btn" data-en="MESSAGE ME ON TELEGRAM" data-ar="راسليني عبر Telegram">MESSAGE ME ON TELEGRAM</a>
     </div>
 
     <div class="rules-box">
@@ -795,6 +601,94 @@
       localStorage.setItem('lang', currentLang);
       applyLanguage();
     });
+
+    // ===== SESSION BOOKING SUBMISSION (Web3Forms) =====
+    const WEB3FORMS_KEY = '1b9b12e3-7a7e-4174-acd1-d5d40fae0b4e';
+    const sessSubmit = document.getElementById('sess-submit');
+    const sessDate = document.getElementById('sess-date');
+
+    // Min date = tomorrow
+    if (sessDate) {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      sessDate.min = tomorrow.toISOString().split('T')[0];
+    }
+
+    if (sessSubmit) {
+      sessSubmit.addEventListener('click', async () => {
+        const name = document.getElementById('sess-name').value.trim();
+        const contact = document.getElementById('sess-contact').value.trim();
+        const sessionType = document.getElementById('sess-type').value;
+        const format = document.getElementById('sess-format').value;
+        const date = document.getElementById('sess-date').value;
+        const time = document.getElementById('sess-time').value;
+        const payment = document.getElementById('sess-payment').value;
+        const reference = document.getElementById('sess-reference').value.trim();
+        const notes = document.getElementById('sess-notes').value.trim();
+
+        if (!name || !contact || !date) {
+          alert(currentLang === 'ar'
+            ? 'يرجى إدخال الاسم ومعلومات التواصل والتاريخ.'
+            : 'Please fill in name, contact, and date.');
+          return;
+        }
+
+        const selected = new Date(date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selected <= today) {
+          alert(currentLang === 'ar'
+            ? 'يجب أن يكون الحجز قبل يوم على الأقل.'
+            : 'Booking must be at least one day in advance.');
+          return;
+        }
+
+        const originalText = sessSubmit.textContent;
+        sessSubmit.disabled = true;
+        sessSubmit.textContent = currentLang === 'ar' ? 'جارٍ الإرسال...' : 'SENDING...';
+
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+              access_key: WEB3FORMS_KEY,
+              subject: "NEW SESSION BOOKING — Lilith's Eclipse",
+              from_name: "Lilith's Eclipse Website",
+              name: name,
+              contact: contact,
+              session_type: sessionType,
+              format: format,
+              date: date,
+              time: time,
+              payment_method: payment,
+              payment_reference: reference || '—',
+              notes: notes || '—',
+              language: currentLang
+            })
+          });
+
+          const data = await res.json();
+          if (data.success) {
+            alert(currentLang === 'ar'
+              ? 'تم إرسال طلب الحجز! سيتم مراجعة الموعد وتأكيده عبر Telegram.'
+              : 'Booking request sent! Your appointment will be reviewed and confirmed via Telegram.');
+            setTimeout(() => window.open('https://t.me/xlilithec', '_blank'), 800);
+            ['sess-name', 'sess-contact', 'sess-date', 'sess-reference', 'sess-notes'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.value = '';
+            });
+          } else {
+            alert(currentLang === 'ar' ? 'حدث خطأ. حاولي مرة أخرى.' : 'Something went wrong. Please try again.');
+          }
+        } catch (err) {
+          alert(currentLang === 'ar' ? 'خطأ في الاتصال.' : 'Connection error.');
+        } finally {
+          sessSubmit.disabled = false;
+          sessSubmit.textContent = originalText;
+        }
+      });
+    }
   </script>
 </body>
 </html>
